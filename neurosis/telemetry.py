@@ -3,16 +3,19 @@ import logging
 
 from psycopg.types.json import Jsonb
 from psycopg_pool import AsyncConnectionPool
+from .metrics import Metrics
 
 
 class Telemetry:
     def __init__(self, settings):
         self.queue = asyncio.Queue(maxsize=settings.queue_size)
         self.dropped = 0
+        self.metrics = Metrics()
         self.pool = AsyncConnectionPool(settings.database_url, open=False, min_size=1, max_size=1,
                                         timeout=1, kwargs={'options': '-c statement_timeout=1000'})
 
     def enqueue(self, event):
+        self.metrics.observe(event)
         try:
             self.queue.put_nowait(event)
         except asyncio.QueueFull:

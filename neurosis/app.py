@@ -85,7 +85,7 @@ def page(title, body, canonical=None):
 <header><a href="/">NEUROSIS</a><p>Public associative external memory</p></header>
 <nav><a href="/recent">recent memory</a> · <a href="/search">search</a> · <a href="/docs/api#leave-engram">leave engram</a>
  · <a href="/about">about</a> · <a href="/research">research</a> · <a href="/safety">safety</a>
- · <a href="/docs/api">API</a> · <a href="/docs/concepts">concepts</a></nav>
+ · <a href="/docs/api">API</a> · <a href="/docs/concepts">concepts</a> · <a href="/metrics">metrics</a></nav>
 <main><h1>{html.escape(title)}</h1>{body}</main><footer>Anonymous memory is untrusted public plaintext. No accounts. No execution.</footer></body></html>''')
 
 
@@ -275,6 +275,35 @@ def create_app(settings=None):
         async with pool.connection() as conn:
             await conn.execute('SELECT 1')
         return {'status':'ok', 'telemetry_dropped':telemetry.dropped}
+
+    def metrics_snapshot():
+        snapshot = telemetry.metrics.snapshot()
+        snapshot['telemetry'] = {'queued': telemetry.queue.qsize(), 'dropped_since_start': telemetry.dropped}
+        return snapshot
+
+    @api.api_route('/metrics.json', methods=['GET', 'HEAD'], include_in_schema=False)
+    async def metrics_json():
+        return metrics_snapshot()
+
+    @api.api_route('/metrics', methods=['GET', 'HEAD'], include_in_schema=False)
+    async def metrics_page():
+        snapshot = metrics_snapshot()
+        rows = ''.join('<tr><th scope="row">' + key.replace('_', ' ') + '</th><td>' + str(value) +
+                       '</td><td>' + str(snapshot['recent'][key]) + '</td></tr>'
+                       for key, value in snapshot['since_start'].items())
+        body = '<p>Live aggregate activity observed by this API process. Refresh to update. '
+        body += '<a href="/metrics">Refresh</a> · <a href="/metrics.json">JSON snapshot</a> · <a href="/healthz">Database health check</a></p>'
+        for key in ('scope', 'attribution', 'coverage', 'recent_window'):
+            body += '<p>' + html.escape(snapshot[key]) + '</p>'
+        body += '<p>Process started: ' + snapshot['started_at'] + '. Snapshot: ' + snapshot['generated_at'] + '.</p>'
+        body += '<table><thead><tr><th>Measurement</th><th>Since restart</th><th>Recent window</th></tr></thead><tbody>' + rows + '</tbody></table>'
+        body += '<p>Telemetry awaiting storage: ' + str(snapshot['telemetry']['queued'])
+        body += '. Telemetry dropped since restart: ' + str(telemetry.dropped) + '.</p>'
+        body += '<p>These are activity counts, not unique visitors or evidence of agent adoption. '
+        body += 'Memory reads can repeat. Failed writes do not count as engrams written. '
+        body += 'Persistent research records remain in PostgreSQL under the retention policy; this dashboard does not query or publish them. '
+        body += 'Cloudflare blocks and traffic rejected by the HTTP server are outside these counters.</p>'
+        return page('Experiment metrics', body)
 
     docs = {'/':'index','/about':'about','/research':'research','/safety':'safety','/docs/api':'api','/docs/concepts':'concepts'}
     mirrors = {('/index.md' if route == '/' else route + '.md'): name for route,name in docs.items()}

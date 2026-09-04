@@ -14,7 +14,7 @@ for host in args.hosts:
     if args.control_port:
         with socket.create_connection((host,args.control_port),timeout=5):
             print('PASS origin reachable on SSH control port')
-    for port in (80,443,5432,5433,8000,8080):
+    for port in (80,443,5355,5432,5433,8000,8080,20241):
         try:
             s=socket.create_connection((host,port),timeout=2)
         except OSError as error:

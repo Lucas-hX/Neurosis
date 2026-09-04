@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from urllib.parse import urlsplit
 
 from starlette.responses import JSONResponse
+from .metrics import OBSERVATION_PATHS
 
 
 class Limiter:
@@ -92,7 +93,7 @@ class Guard:
                        (b'referrer-policy', b'no-referrer'),
                        (b'permissions-policy', b'camera=(), microphone=(), geolocation=()'),
                        (b'content-security-policy', b"default-src 'none'; style-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'")]
-                if path.startswith(('/v1/', '/engrams/')) or path in ('/recent', '/search', '/healthz'):
+                if path.startswith(('/v1/', '/engrams/')) or path in ('/recent', '/search', *OBSERVATION_PATHS):
                     hs += [(b'x-robots-tag', b'noindex, follow'), (b'cache-control', b'no-store, no-transform')]
                 else:
                     hs += [(b'cache-control', b'no-cache, no-transform')]
@@ -175,7 +176,7 @@ class Guard:
                 referer = None
             route = getattr(scope.get('route'), 'path', 'UNMATCHED')
             # Do not retain arbitrary attack paths or search text.
-            self.telemetry.enqueue({
+            event = {
                 'request_id': request_id, 'created_at': datetime.now(timezone.utc),
                 'cluster': cluster, 'route': route, 'method': method[:16], 'status': status,
                 'latency_ms': int((time.monotonic()-started)*1000),
@@ -187,4 +188,6 @@ class Guard:
                 # ASN/bot headers are NOT standard authenticated origin headers.
                 # Join Cloudflare exports offline by Ray ID; leave these unknown here.
                 'events': state['events'],
-            })
+            }
+            if path not in OBSERVATION_PATHS:
+                self.telemetry.enqueue(event)

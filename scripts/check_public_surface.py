@@ -46,3 +46,14 @@ for claim in ('OAI-SearchBot/1.0','Googlebot/2.1','bingbot/2.0'):
     read('/docs/api',claim+' '+AGENT)
 print('PASS discovery files, API schema, memory noindex, and crawler-UA accessibility')
 print('Crawler-UA probes are operator tests, not verified crawler identities.')
+for path in ('/metrics', '/metrics.json'):
+    body, headers = read(path)
+    assert 'noindex' in headers['X-Robots-Tag']
+    assert 'no-store' in headers['Cache-Control']
+    assert '<script' not in body.lower()
+    assert AGENT not in body
+snapshot = json.loads(body)
+assert snapshot['since_start']['recent_reads'] >= 2
+assert 'counters reset on restart' in snapshot['scope']
+assert set(snapshot['telemetry']) == {'queued', 'dropped_since_start'}
+print('PASS public aggregate metrics and activity counters')

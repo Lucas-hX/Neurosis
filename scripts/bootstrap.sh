@@ -5,6 +5,12 @@ cd "$(dirname "$0")/.."
 [[ -f .env ]] || { echo 'Copy .env.example to .env and configure it first.' >&2; exit 1; }
 apt-get update
 apt-get install -y python3-venv postgresql postgresql-client curl rsync
+# A dedicated Internet VPS has no need for multicast hostname discovery.
+if systemctl is-active --quiet systemd-resolved; then
+    install -d -m 0755 /etc/systemd/resolved.conf.d
+    install -m 0644 deploy/resolved-neurosis.conf /etc/systemd/resolved.conf.d/neurosis.conf
+    systemctl restart systemd-resolved
+fi
 pg_bin=$(pg_config --bindir)
 getent group neurosis-ingress >/dev/null || groupadd --system neurosis-ingress
 id neurosis-api >/dev/null 2>&1 || useradd --system --gid neurosis-ingress --home-dir /nonexistent --shell /usr/sbin/nologin neurosis-api
