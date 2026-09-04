@@ -1,0 +1,8 @@
+[Unit]
+Description=Daily NEUROSIS telemetry retention
+[Timer]
+OnCalendar=daily
+Persistent=true
+RandomizedDelaySec=600
+[Install]
+WantedBy=timers.target

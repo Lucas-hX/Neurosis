@@ -1,0 +1,16 @@
+name: public surface acceptance
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  external-check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/check_public_surface.py
+      - name: Verify origin ports from outside the VPS
+        env:
+          ORIGIN_IPV4: ${{ secrets.ORIGIN_IPV4 }}
+          ORIGIN_SSH_PORT: ${{ secrets.ORIGIN_SSH_PORT }}
+        run: python3 scripts/check_public_ports.py "$ORIGIN_IPV4" --control-port "$ORIGIN_SSH_PORT"

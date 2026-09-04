@@ -1,0 +1,43 @@
+[Unit]
+Description=NEUROSIS isolated PostgreSQL
+After=local-fs.target
+
+[Service]
+Type=simple
+ExecStartPre=/usr/bin/python3 /usr/local/lib/neurosis-network-probe.py
+User=postgres
+Group=postgres
+ExecStart=@PG_BIN@/postgres -D /var/lib/postgresql/neurosis -c config_file=/etc/neurosis/postgresql.conf
+KillSignal=SIGINT
+TimeoutStopSec=120
+Restart=on-failure
+RestartSec=3
+RuntimeDirectory=postgresql-neurosis
+RuntimeDirectoryMode=0755
+PrivateNetwork=yes
+RestrictAddressFamilies=AF_UNIX
+IPAddressDeny=any
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/postgresql/neurosis
+TemporaryFileSystem=/run
+BindPaths=/run/postgresql-neurosis
+InaccessiblePaths=-/etc/cloudflared -/etc/neurosis-tunnel -/opt -/var/lib/postgresql/17/main -/var/lib/postgresql/15/main
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+RestrictSUIDSGID=yes
+RestrictNamespaces=yes
+LockPersonality=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+SystemCallArchitectures=native
+MemoryMax=3G
+CPUQuota=200%
+TasksMax=128
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

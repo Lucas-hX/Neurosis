@@ -1,0 +1,31 @@
+[Unit]
+Description=NEUROSIS existing Cloudflare Tunnel
+Wants=neurosis-api.service
+After=network-online.target neurosis-api.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=neurosis-tunnel
+Group=neurosis-ingress
+SupplementaryGroups=neurosis-tunnel
+ExecStart=/usr/local/bin/cloudflared --no-autoupdate --config /etc/neurosis-tunnel/config.yml tunnel run
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+CapabilityBoundingSet=
+RestrictSUIDSGID=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+InaccessiblePaths=-/var/lib/postgresql -/etc/neurosis -/run/postgresql -/run/postgresql-neurosis -/opt/neurosis
+MemoryMax=512M
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target

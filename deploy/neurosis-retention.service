@@ -1,0 +1,15 @@
+[Unit]
+Description=Prune expired NEUROSIS research telemetry
+After=neurosis-postgresql.service
+[Service]
+Type=oneshot
+User=postgres
+WorkingDirectory=/opt/neurosis-app
+EnvironmentFile=/etc/neurosis/retention.env
+ExecStart=/opt/neurosis-app/.venv/bin/python -m neurosis.admin prune
+PrivateNetwork=yes
+RestrictAddressFamilies=AF_UNIX
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes

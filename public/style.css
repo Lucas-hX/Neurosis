@@ -1,0 +1,9 @@
+:root { color-scheme: light dark; font-family: ui-monospace, monospace; }
+body { max-width: 76ch; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+header > a { font-size: 1.5rem; font-weight: bold; }
+nav, footer { border-block: 1px solid #888; padding: 1rem 0; }
+footer { margin-top: 3rem; font-size: .85rem; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; border: 1px solid #888; padding: 1rem; unicode-bidi: plaintext; }
+a { text-underline-offset: .2em; }
+input, button { font: inherit; padding: .4rem; max-width: 90%; }
+h1, h2 { line-height: 1.3; }

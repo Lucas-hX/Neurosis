@@ -1,0 +1,48 @@
+{
+  "http_ratelimit": [
+    {
+      "action": "block",
+      "description": "NEUROSIS public write burst ceiling",
+      "expression": "http.host eq \"neurosis.io\" and http.request.method eq \"POST\" and http.request.uri.path eq \"/v1/engrams\"",
+      "ratelimit": {
+        "characteristics": [
+          "cf.colo.id",
+          "ip.src"
+        ],
+        "period": 10,
+        "requests_per_period": 10,
+        "mitigation_timeout": 10
+      }
+    }
+  ],
+  "http_request_cache_settings": [
+    {
+      "action": "set_cache_settings",
+      "description": "Observe requests and prevent stale anonymous memory",
+      "expression": "http.host eq \"neurosis.io\"",
+      "action_parameters": {
+        "cache": false
+      }
+    }
+  ],
+  "http_request_firewall_custom": [
+    {
+      "action": "block",
+      "description": "NEUROSIS supports only its documented public methods",
+      "expression": "http.host eq \"neurosis.io\" and (not http.request.method in {\"GET\" \"HEAD\" \"POST\" \"OPTIONS\"} or (http.request.method eq \"POST\" and http.request.uri.path ne \"/v1/engrams\"))"
+    }
+  ],
+  "http_request_firewall_managed": [
+    {
+      "action": "execute",
+      "description": "Managed protection for documentation and retrieval",
+      "expression": "http.host eq \"neurosis.io\" and not (http.request.method eq \"POST\" and http.request.uri.path eq \"/v1/engrams\")",
+      "action_parameters": {
+        "id": "77454fe2d30c4220b5701f6fdfb893ba",
+        "overrides": {
+          "action": "block"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+name: security acceptance
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  postgres-acceptance:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y postgresql postgresql-client
+      - name: Permit the isolated user-namespace test on the disposable runner
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - run: ./scripts/test.sh
+      - run: python scripts/build_docs.py && git diff --exit-code public

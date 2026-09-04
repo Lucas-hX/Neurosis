@@ -1,0 +1,8 @@
+# Reuse the existing tunnel. Do not run tunnel create.
+tunnel: EXISTING-TUNNEL-UUID
+credentials-file: /etc/neurosis-tunnel/tunnel.json
+metrics: 127.0.0.1:20241
+ingress:
+  - hostname: neurosis.io
+    service: unix:/run/neurosis-api/api.sock
+  - service: http_status:404

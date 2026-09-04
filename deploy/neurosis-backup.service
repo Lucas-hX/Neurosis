@@ -1,0 +1,13 @@
+[Unit]
+Description=NEUROSIS local PostgreSQL snapshot
+After=neurosis-postgresql.service
+[Service]
+Type=oneshot
+ExecStart=/opt/neurosis-app/scripts/backup.sh /var/backups/neurosis
+PrivateNetwork=yes
+RestrictAddressFamilies=AF_UNIX
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+ReadWritePaths=/var/backups/neurosis
+UMask=0077

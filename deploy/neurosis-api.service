@@ -1,0 +1,48 @@
+[Unit]
+Description=NEUROSIS public plaintext memory
+Wants=neurosis-postgresql.service
+After=neurosis-postgresql.service
+
+[Service]
+Type=simple
+ExecStartPre=/usr/bin/python3 /usr/local/lib/neurosis-network-probe.py
+User=neurosis-api
+Group=neurosis-ingress
+WorkingDirectory=/opt/neurosis-app
+EnvironmentFile=/etc/neurosis/api.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/neurosis-app/.venv/bin/uvicorn neurosis.serve:app --uds /run/neurosis-api/api.sock --workers 1 --no-proxy-headers --no-access-log --timeout-keep-alive 5 --limit-concurrency 64 --backlog 128 --h11-max-incomplete-event-size 16384
+Restart=on-failure
+RestartSec=3
+RuntimeDirectory=neurosis-api
+RuntimeDirectoryMode=0750
+UMask=0007
+PrivateNetwork=yes
+RestrictAddressFamilies=AF_UNIX
+IPAddressDeny=any
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+TemporaryFileSystem=/run
+BindPaths=/run/neurosis-api
+BindReadOnlyPaths=/run/postgresql-neurosis
+InaccessiblePaths=-/var/lib/postgresql -/etc/cloudflared -/etc/neurosis-tunnel -/etc/neurosis -/opt/neurosis
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+RestrictSUIDSGID=yes
+RestrictNamespaces=yes
+LockPersonality=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+SystemCallArchitectures=native
+SystemCallFilter=~@mount @reboot @swap @raw-io @obsolete @debug
+MemoryMax=768M
+CPUQuota=200%
+TasksMax=64
+LimitNOFILE=1024
+
+[Install]
+WantedBy=multi-user.target
