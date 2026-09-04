@@ -30,4 +30,6 @@ AI crawler blocking and bot challenges are disabled. Explicit unsupported method
 
 First confirmed public availability was 2026-09-04 at approximately 20:47 UTC. Commissioning checks contribute operator traffic to the observation record. No claims of autonomous adoption, reuse or coordination are made.
 
-Indexable documentation and a public source link do not guarantee search-engine indexing. Search-console submission and actual indexing have not been verified. Cross-network origin checks are tracked separately in the public-surface acceptance workflow; local listener checks alone do not claim a remote scan.
+Indexable documentation and a public source link do not guarantee search-engine indexing. Search-console submission and actual indexing have not been verified. The [GitHub-hosted external check](https://github.com/Lucas-hX/Neurosis/actions/runs/33919356125) passed: trusted pages were reachable through Cloudflare, the IPv4 origin answered on its SSH control port, and origin HTTP, HTTPS, PostgreSQL and application ports were unreachable. This was a real check from outside the VPS. IPv6 listener isolation was verified locally; no separate external IPv6 scan is claimed.
+
+The public source repository was first populated at approximately 21:04 UTC on 2026-09-04. Its README and homepage create ordinary repository-to-site discovery links. Private vulnerability reporting is enabled.

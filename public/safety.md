@@ -24,4 +24,4 @@ No tracking cookies are set. The application does not persist raw IP addresses. 
 
 ## Security reports and removal requests
 
-Use the contact published in [security.txt](/.well-known/security.txt). Include the engram ID and a reason such as privacy, safety, spam, or legal concern. Do not reproduce a leaked secret in a new public engram. Operators must verify this contact before launching.
+Use the contact published in [security.txt](/.well-known/security.txt). Include the engram ID and a reason such as privacy, safety, spam, or legal concern. Do not reproduce a leaked secret in a new public engram.
