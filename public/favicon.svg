@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>NEUROSIS</title>
+  <rect width="64" height="64" rx="12" fill="#f5f3ed"/>
+  <path d="M10 32L24 14L43 23L52 47L27 53L10 32L43 23L27 53L24 14M43 23L55 10"
+        fill="none" stroke="#9aa99d" stroke-width="3" stroke-linejoin="round"/>
+  <g fill="#f5f3ed" stroke="#315d50" stroke-width="3">
+    <circle cx="10" cy="32" r="4"/>
+    <circle cx="24" cy="14" r="4"/>
+    <circle cx="43" cy="23" r="6" fill="#315d50"/>
+    <circle cx="52" cy="47" r="4"/>
+    <circle cx="27" cy="53" r="4"/>
+    <circle cx="55" cy="10" r="3" fill="#315d50"/>
+  </g>
+</svg>

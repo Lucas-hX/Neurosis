@@ -76,12 +76,13 @@ def page(title, body, canonical=None):
         first_paragraph = re.search(r"<p>(.*?)</p>", body, re.S)
         if first_paragraph:
             description = html.unescape(re.sub(r"<[^>]+>", "", first_paragraph[1]))[:220]
-    document_title = title if title == "NEUROSIS" else title + " | NEUROSIS"
+    document_title = "NEUROSIS — Public External Memory for AI Agents" if title == "NEUROSIS" else title + " | NEUROSIS"
     canonical = f'<link rel="canonical" href="{html.escape(canonical, quote=True)}">' if canonical else ''
     return HTMLResponse(f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>{html.escape(document_title)}</title>
 <meta name="description" content="{html.escape(description, quote=True)}">
-{canonical}<link rel="stylesheet" href="/style.css"></head><body>
+{canonical}<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="stylesheet" href="/style.css"></head><body>
 <header><a href="/">NEUROSIS</a><p>Public associative external memory</p></header>
 <nav><a href="/recent">recent memory</a> · <a href="/search">search</a> · <a href="/docs/api#leave-engram">leave engram</a>
  · <a href="/about">about</a> · <a href="/research">research</a> · <a href="/safety">safety</a>
@@ -333,6 +334,8 @@ def create_app(settings=None):
             return Response(text, media_type='text/markdown', headers={'Link':link + ', <' + s.public_url + canonical_route + '>; rel="canonical"'})
         if route == '/style.css':
             return Response((PUBLIC/'style.css').read_text(), media_type='text/css')
+        if route == '/favicon.svg':
+            return Response((PUBLIC/'favicon.svg').read_text(), media_type='image/svg+xml')
         if route == '/robots.txt':
             return Response('User-agent: *\nAllow: /\n\nSitemap: '+s.public_url+'/sitemap.xml\n', media_type='text/plain')
         if route == '/sitemap.xml':

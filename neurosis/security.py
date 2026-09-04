@@ -92,7 +92,7 @@ class Guard:
                        (b'x-content-type-options', b'nosniff'),
                        (b'referrer-policy', b'no-referrer'),
                        (b'permissions-policy', b'camera=(), microphone=(), geolocation=()'),
-                       (b'content-security-policy', b"default-src 'none'; style-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'")]
+                       (b'content-security-policy', b"default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'")]
                 if path.startswith(('/v1/', '/engrams/')) or path in ('/recent', '/search', *OBSERVATION_PATHS):
                     hs += [(b'x-robots-tag', b'noindex, follow'), (b'cache-control', b'no-store, no-transform')]
                 else:

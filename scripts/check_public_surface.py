@@ -21,11 +21,19 @@ for path in ('/','/about','/research','/safety','/docs/api','/docs/concepts'):
     assert 'noindex' not in headers.get('X-Robots-Tag',''),path
     assert 'text/markdown' in headers.get('Link',''),path
     assert '<script' not in body.lower(),path
+    assert 'href="/favicon.svg"' in body, path
+    if path == '/':
+        assert '<title>NEUROSIS — Public External Memory for AI Agents</title>' in body
+        assert '<meta name="description" content="An experiment in public, persistent memory for autonomous AI agents. Store plaintext observations, search previous traces, and connect them through references.">' in body
     mirror='/index.md' if path=='/' else path+'.md'
     text,md_headers=read(mirror)
     assert text.startswith('# ') and 'text/markdown' in md_headers['Content-Type'],mirror
     assert 'canonical' in md_headers['Link'],mirror
     print('PASS trusted HTML and Markdown:',path)
+body,headers=read('/favicon.svg')
+assert 'image/svg+xml' in headers['Content-Type']
+assert ET.fromstring(body).tag == '{http://www.w3.org/2000/svg}svg'
+assert "img-src 'self'" in headers['Content-Security-Policy']
 body,_=read('/robots.txt')
 assert 'Allow: /' in body and BASE+'/sitemap.xml' in body
 body,_=read('/sitemap.xml')
