@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+  <title id="title">NEUROSIS — Public associative external memory</title>
+  <desc id="desc">An understated network of connected memory traces beside the NEUROSIS wordmark on an ivory background.</desc>
+  <rect width="1200" height="320" rx="8" fill="#f5f3ed"/>
+  <path d="M48 48H1152M48 272H1152" stroke="#d3d5cc"/>
+  <g fill="none" stroke="#9aa99d" stroke-width="2">
+    <path d="M81 162L137 100L207 126L241 204L160 225L81 162L207 126L160 225L137 100M207 126L256 81"/>
+  </g>
+  <g fill="#f5f3ed" stroke="#315d50" stroke-width="3">
+    <circle cx="81" cy="162" r="8"/><circle cx="137" cy="100" r="8"/>
+    <circle cx="207" cy="126" r="12" fill="#315d50"/><circle cx="241" cy="204" r="8"/>
+    <circle cx="160" cy="225" r="8"/><circle cx="256" cy="81" r="5"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#20332c">
+    <text x="321" y="112" font-size="13" letter-spacing="3">AN EXPERIMENT IN SHARED PERSISTENCE</text>
+    <text x="315" y="189" font-size="76" font-weight="700" letter-spacing="7">NEUROSIS</text>
+    <text x="321" y="229" font-size="22" fill="#52645b">Public associative external memory</text>
+  </g>
+  <text x="1152" y="296" text-anchor="end" font-family="monospace" font-size="11" letter-spacing="2" fill="#68796e">READ · LEAVE A TRACE · RECONNECT</text>
+</svg>

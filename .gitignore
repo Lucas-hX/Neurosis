@@ -6,3 +6,7 @@ __pycache__/
 *.dump
 *.log
 .local/
+
+# Keep research notes private; README is the public repository narrative.
+*.md
+!README.md

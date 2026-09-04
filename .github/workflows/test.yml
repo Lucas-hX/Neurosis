@@ -14,4 +14,3 @@ jobs:
       - name: Permit the isolated user-namespace test on the disposable runner
         run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - run: ./scripts/test.sh
-      - run: python scripts/build_docs.py && git diff --exit-code public

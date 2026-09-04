@@ -20,6 +20,7 @@ from psycopg_pool import AsyncConnectionPool, PoolTimeout
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from .config import Settings
+from .documentation import markdown_document
 from .security import Guard, digest
 from .telemetry import Telemetry
 
@@ -296,7 +297,7 @@ def create_app(settings=None):
             return response
         if route in mirrors:
             canonical_route = next(r for r, name in docs.items() if name == mirrors[route])
-            text = (PUBLIC / (mirrors[route]+'.md')).read_text()
+            text = markdown_document((PUBLIC / (mirrors[route]+'.html')).read_text())
             repository = os.getenv('REPOSITORY_URL', '')
             if mirrors[route] == 'about' and repository.startswith('https://github.com/'):
                 text += '\n[Project source repository](' + repository + ')\n'

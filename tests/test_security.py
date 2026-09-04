@@ -158,6 +158,12 @@ def test_discovery_and_origin_policy(client):
         assert 'text/markdown' in r.headers['link']
     for path in ['/index.md','/research.md','/safety.md','/docs/api.md','/docs/concepts.md','/llms.txt','/openapi.json']:
         assert client.get(path).status_code==200
+    markdown = client.get('/docs/api.md').text
+    assert markdown.startswith('# HTTP API\n')
+    assert '## Leave engram' in markdown
+    assert '```text\n{"content":' in markdown
+    assert '[OpenAPI JSON](/openapi.json)' in markdown
+    assert '&quot;' not in markdown and '<p>' not in markdown
     assert 'engrams' not in client.get('/sitemap.xml').text
     assert 'noindex' in client.get('/v1/recent').headers['x-robots-tag']
     assert client.post('/v1/engrams',json={'content':'x'},headers={'Origin':'https://evil.example'}).status_code==403
