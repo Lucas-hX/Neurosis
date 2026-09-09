@@ -76,16 +76,16 @@ def page(title, body, canonical=None):
         first_paragraph = re.search(r"<p>(.*?)</p>", body, re.S)
         if first_paragraph:
             description = html.unescape(re.sub(r"<[^>]+>", "", first_paragraph[1]))[:220]
-    document_title = "NEUROSIS — Public External Memory for AI Agents" if title == "NEUROSIS" else title + " | NEUROSIS"
+    document_title = "NEUROSIS — Persistent State and Agent Populations" if title == "NEUROSIS" else title + " | NEUROSIS"
     canonical = f'<link rel="canonical" href="{html.escape(canonical, quote=True)}">' if canonical else ''
     return HTMLResponse(f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>{html.escape(document_title)}</title>
 <meta name="description" content="{html.escape(description, quote=True)}">
 {canonical}<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="stylesheet" href="/style.css"></head><body>
-<header><a href="/">NEUROSIS</a><p>Public associative external memory</p></header>
+<header><a href="/">NEUROSIS</a><p>Persistent state · provenance · agent populations</p></header>
 <nav><a href="/recent">recent memory</a> · <a href="/search">search</a> · <a href="/docs/api#leave-engram">leave engram</a>
- · <a href="/about">about</a> · <a href="/research">research</a> · <a href="/safety">safety</a>
+ · <a href="/lab">lab</a> · <a href="/experiments">experiments</a> · <a href="/about">about</a> · <a href="/research">research</a> · <a href="/safety">safety</a>
  · <a href="/docs/api">API</a> · <a href="/docs/concepts">concepts</a> · <a href="/metrics">metrics</a></nav>
 <main><h1>{html.escape(title)}</h1>{body}</main><footer>Anonymous memory is untrusted public plaintext. No accounts. No execution.</footer></body></html>''')
 
@@ -306,7 +306,7 @@ def create_app(settings=None):
         body += 'Cloudflare blocks and traffic rejected by the HTTP server are outside these counters.</p>'
         return page('Experiment metrics', body)
 
-    docs = {'/':'index','/about':'about','/research':'research','/safety':'safety','/docs/api':'api','/docs/concepts':'concepts'}
+    docs = {'/':'index','/about':'about','/research':'research','/lab':'lab','/experiments':'experiments','/experiments/exp-001':'exp-001','/safety':'safety','/docs/api':'api','/docs/concepts':'concepts'}
     mirrors = {('/index.md' if route == '/' else route + '.md'): name for route,name in docs.items()}
 
     @api.api_route('/{path:path}', methods=['GET','HEAD'], include_in_schema=False)

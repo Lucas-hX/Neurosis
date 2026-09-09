@@ -7,6 +7,12 @@ __pycache__/
 *.log
 .local/
 
-# Keep research notes private; README is the public repository narrative.
+# Keep private notes ignored; explicitly publish the maintained research documents.
 *.md
 !README.md
+
+!docs/RESEARCH_DIRECTION.md
+!docs/RELATED_WORK.md
+!docs/LAB_FOUNDATIONS.md
+!docs/LAB_ROADMAP.md
+!docs/EXP_001_SPEC.md

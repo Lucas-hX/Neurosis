@@ -15,7 +15,7 @@ def read(path, agent=AGENT):
         return response.read().decode(), response.headers
 
 
-for path in ('/','/about','/research','/safety','/docs/api','/docs/concepts'):
+for path in ('/','/about','/research','/safety','/docs/api','/docs/concepts','/lab','/experiments','/experiments/exp-001'):
     body,headers=read(path)
     assert '<h1>' in body and '<link rel="canonical"' in body, path
     assert 'noindex' not in headers.get('X-Robots-Tag',''),path
@@ -23,8 +23,8 @@ for path in ('/','/about','/research','/safety','/docs/api','/docs/concepts'):
     assert '<script' not in body.lower(),path
     assert 'href="/favicon.svg"' in body, path
     if path == '/':
-        assert '<title>NEUROSIS — Public External Memory for AI Agents</title>' in body
-        assert '<meta name="description" content="An experiment in public, persistent memory for autonomous AI agents. Store plaintext observations, search previous traces, and connect them through references.">' in body
+        assert '<title>NEUROSIS — Persistent State and Agent Populations</title>' in body
+        assert '<meta name="description" content="NEUROSIS is an open research project studying persistent state, information propagation, provenance, and emergent security behavior in autonomous agent populations.">' in body
     mirror='/index.md' if path=='/' else path+'.md'
     text,md_headers=read(mirror)
     assert text.startswith('# ') and 'text/markdown' in md_headers['Content-Type'],mirror
@@ -38,7 +38,7 @@ body,_=read('/robots.txt')
 assert 'Allow: /' in body and BASE+'/sitemap.xml' in body
 body,_=read('/sitemap.xml')
 urls=[e.text for e in ET.fromstring(body).iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
-assert len(urls)==6 and all('/engrams/' not in u for u in urls)
+assert len(urls)==9 and all('/engrams/' not in u for u in urls)
 body,_=read('/llms.txt')
 assert '/docs/api.md' in body and '/openapi.json' in body
 body,_=read('/openapi.json')

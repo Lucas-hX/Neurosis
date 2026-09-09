@@ -1,0 +1,14 @@
+NEUROSIS Lab
+<p>Track B is the controlled research track for agent populations, shared persistent state, and population-level security. Status: early development; experiments are planned and no results are published.</p>
+<h2 id="question">The experimental question</h2>
+<p>Individual-agent safety does not imply population safety. How does information spread, become trusted, get poisoned, or get corrected across agents, resources, and time?</p>
+<h2 id="first-experiment">First experiment: Consensus Is Not Independence</h2>
+<p>EXP-001 will test whether repeated claims from one origin are treated as independent corroboration. Source dependence and provenance visibility will be controlled separately. <a href="/experiments/exp-001">Read the planned experiment</a>.</p>
+<h2 id="method">Method and reproducibility</h2>
+<p>Every published run must include a versioned configuration, source commit, provider/model settings, prompts and hashes, seeds, raw events, metrics, limitations, and reproduction instructions. Recorded replay and a fresh model rerun are different: a seed alone does not guarantee identical provider output.</p>
+<p>The planned Agent Interaction Graph will connect observed sources, messages, agents, claims, and actions. Platform observations, agent self-reports, and inferred relationships must stay distinguishable. Missing provenance means unknown independence.</p>
+<h2 id="isolation">Isolation</h2>
+<p>Lab storage is separate from public memory and naturalistic request telemetry. Initial experiments use synthetic tasks and local resources, with no public-memory writes or unauthorized third-party targets. The public memory server does not run agents or hold provider credentials.</p>
+<h2 id="status">Before the first run</h2>
+<p>The repository contains the foundation contracts and an implementation backlog. The provider adapter, bounded population harness, controlled board, graph analysis, and EXP-001 environment remain to be built. There are no run traces or findings to inspect yet.</p>
+<p><a href="/experiments">Experiment index</a> · <a href="https://github.com/Lucas-hX/Neurosis/blob/main/docs/LAB_FOUNDATIONS.md">Foundation contracts</a> · <a href="https://github.com/Lucas-hX/Neurosis/blob/main/docs/LAB_ROADMAP.md">Implementation roadmap</a> · <a href="/recent">Public Substrate</a></p>

@@ -1,0 +1,211 @@
+{
+  "$defs": {
+    "ModelConfiguration": {
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+          "title": "Model",
+          "type": "string"
+        },
+        "model_version": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Model Version",
+          "type": "string"
+        },
+        "temperature": {
+          "minimum": 0,
+          "title": "Temperature",
+          "type": "number"
+        },
+        "token_budget": {
+          "exclusiveMinimum": 0,
+          "title": "Token Budget",
+          "type": "integer"
+        },
+        "system_prompt_hash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "System Prompt Hash",
+          "type": "string"
+        },
+        "agent_prompt_hash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Agent Prompt Hash",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "model_version",
+        "temperature",
+        "token_budget",
+        "system_prompt_hash",
+        "agent_prompt_hash"
+      ],
+      "title": "ModelConfiguration",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0",
+      "default": "0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "track": {
+      "const": "lab",
+      "default": "lab",
+      "title": "Track",
+      "type": "string"
+    },
+    "synthetic": {
+      "const": true,
+      "default": true,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "experiment_id": {
+      "pattern": "^EXP-[0-9]{3}$",
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "experiment_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Experiment Version",
+      "type": "string"
+    },
+    "run_id": {
+      "format": "uuid",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "population_id": {
+      "format": "uuid",
+      "title": "Population Id",
+      "type": "string"
+    },
+    "git_commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Git Commit",
+      "type": "string"
+    },
+    "seed": {
+      "minimum": 0,
+      "title": "Seed",
+      "type": "integer"
+    },
+    "models": {
+      "items": {
+        "$ref": "#/$defs/ModelConfiguration"
+      },
+      "minItems": 1,
+      "title": "Models",
+      "type": "array"
+    },
+    "population_size": {
+      "exclusiveMinimum": 0,
+      "title": "Population Size",
+      "type": "integer"
+    },
+    "topology": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Topology",
+      "type": "string"
+    },
+    "adversarial_fraction": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Adversarial Fraction",
+      "type": "number"
+    },
+    "declared_channels": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+        "type": "string"
+      },
+      "title": "Declared Channels",
+      "type": "array"
+    },
+    "shared_resources": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+        "type": "string"
+      },
+      "title": "Shared Resources",
+      "type": "array"
+    },
+    "environment_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "title": "Environment Version",
+      "type": "string"
+    },
+    "config_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Config Hash",
+      "type": "string"
+    },
+    "start_time": {
+      "format": "date-time",
+      "title": "Start Time",
+      "type": "string"
+    },
+    "end_time": {
+      "format": "date-time",
+      "title": "End Time",
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "completed",
+        "failed",
+        "cancelled"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    }
+  },
+  "required": [
+    "experiment_id",
+    "experiment_version",
+    "run_id",
+    "population_id",
+    "git_commit",
+    "seed",
+    "models",
+    "population_size",
+    "topology",
+    "adversarial_fraction",
+    "declared_channels",
+    "shared_resources",
+    "environment_version",
+    "config_hash",
+    "start_time",
+    "end_time",
+    "outcome"
+  ],
+  "title": "RunManifest",
+  "type": "object"
+}

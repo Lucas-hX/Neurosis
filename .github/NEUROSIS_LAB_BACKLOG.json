@@ -1,0 +1,269 @@
+{
+  "project": "NEUROSIS Lab \u2014 Phase 0/1",
+  "columns": [
+    "Backlog",
+    "Ready",
+    "In Progress",
+    "Blocked",
+    "Done"
+  ],
+  "project_access": "Token lacks read:project/project scope; use this file to import project items.",
+  "issues": [
+    {
+      "id": "LAB-01",
+      "title": "Embed the two-track research direction and open-source foundation",
+      "priority": "P0",
+      "labels": [
+        "lab",
+        "P0",
+        "docs",
+        "web"
+      ],
+      "dependencies": [],
+      "description": "Preserve Track A and prepare honest Lab discovery surfaces before experimental implementation.",
+      "acceptance_criteria": [
+        "README, homepage, about and research explain both tracks and preserve memory entry points.",
+        "Add Apache-2.0 LICENSE, repository citation metadata, research direction and related-work documents.",
+        "Serve Lab overview, planned experiment index/detail and Markdown mirrors without fabricated results.",
+        "Run existing safety/content tests and verify navigation, metadata, sitemap and public API compatibility."
+      ],
+      "status": "In Progress",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/3"
+    },
+    {
+      "id": "LAB-02",
+      "title": "Define canonical Lab artifacts and isolated append-only recording",
+      "priority": "P0",
+      "labels": [
+        "lab",
+        "P0",
+        "observability",
+        "reproducibility",
+        "security"
+      ],
+      "dependencies": [
+        "LAB-01"
+      ],
+      "description": "Provide provider-neutral run/event contracts and operator-only storage without contaminating public memory or adoption telemetry.",
+      "acceptance_criteria": [
+        "Version manifest and NeurosisEvent schemas with experiment/run/population, model/config/prompt/source provenance and synthetic labels.",
+        "Add migration-safe isolated lab namespace, immutable events, validation, retry conflict handling and deterministic JSONL export.",
+        "Test invalid associations/ancestry, immutable IDs, rollback and public-role denial; document offline collection limits.",
+        "Keep provider credentials and Lab ingestion outside the public HTTP application."
+      ],
+      "status": "In Progress",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/4"
+    },
+    {
+      "id": "LAB-03",
+      "title": "Build the bounded provider-neutral population harness",
+      "priority": "P1",
+      "labels": [
+        "lab",
+        "P1",
+        "infra",
+        "observability"
+      ],
+      "dependencies": [
+        "LAB-02"
+      ],
+      "description": "Implement logical agents and a small async runner as a separate operator process.",
+      "acceptance_criteria": [
+        "Agent interface captures ID, state/context, adapter, bounded turn loop and instrumentation hooks.",
+        "Select an available official developer API at implementation time; record model/version/settings and prompt bytes/hashes.",
+        "Start with deterministic fixtures then support 10\u201320 logical agents with bounded concurrency, timeouts, retries and cancellation.",
+        "Record all attempts, usage/cost where exposed, failed/cancelled runs and gaps; enforce token and monetary ceilings.",
+        "No public-server egress expansion or dependency on a consumer UI subscription."
+      ],
+      "status": "Backlog",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/5"
+    },
+    {
+      "id": "LAB-04",
+      "title": "Build the isolated instrumented shared board",
+      "priority": "P1",
+      "labels": [
+        "lab",
+        "P1",
+        "infra",
+        "provenance"
+      ],
+      "dependencies": [
+        "LAB-02"
+      ],
+      "description": "Provide controlled post/read/reference operations for run-scoped experiments.",
+      "acceptance_criteria": [
+        "Link records and every read/write/reference event to the run/population and source lineage.",
+        "Enforce no cross-run access and no writes to the public substrate.",
+        "Support deterministic fixtures, explicit and hidden provenance views, and tests for leakage across views."
+      ],
+      "status": "Backlog",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/6"
+    },
+    {
+      "id": "LAB-05",
+      "title": "Build interaction graph and known-origin analysis v0",
+      "priority": "P1",
+      "labels": [
+        "lab",
+        "P1",
+        "provenance",
+        "observability"
+      ],
+      "dependencies": [
+        "LAB-02",
+        "LAB-04"
+      ],
+      "description": "Derive reproducible graph artifacts and limited independence analysis from recorded events.",
+      "acceptance_criteria": [
+        "Generate deterministic JSON nodes/edges with supporting event IDs and evidence kinds.",
+        "Traverse source \u2192 message/memory \u2192 agent \u2192 claim/action paths and direct/common ancestors.",
+        "Compute known origin count and CIR for controlled fixtures; missing provenance stays unknown and zero denominators undefined.",
+        "Test independent origins, repeated origin, missing events, duplicate identities and graph replay; do not treat timestamps as causal proof."
+      ],
+      "status": "Backlog",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/7"
+    },
+    {
+      "id": "LAB-06",
+      "title": "Finalize the reviewable EXP-001 protocol",
+      "priority": "P1",
+      "labels": [
+        "lab",
+        "P1",
+        "research",
+        "experiment"
+      ],
+      "dependencies": [
+        "LAB-01"
+      ],
+      "description": "Turn docs/EXP_001_SPEC.md into a pinned protocol before a pilot; the draft is ready for environment implementation.",
+      "acceptance_criteria": [
+        "Specify synthetic ground truth, independence \u00d7 provenance conditions, matched apparent consensus and task difficulty.",
+        "Pin prompts, seeds/trials, evaluator, primary/secondary metrics, exclusions, uncertainty, correction and stop rules.",
+        "Record provider/version, actual token/cost ceiling and timeout policy before a paid run.",
+        "Document scripted-reporter pilot limits, provenance leakage checks, and single-agent comparison needs."
+      ],
+      "status": "Backlog",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/8"
+    },
+    {
+      "id": "LAB-07",
+      "title": "Implement the EXP-001 controlled environment and evaluator",
+      "priority": "P1",
+      "labels": [
+        "lab",
+        "P1",
+        "experiment",
+        "provenance"
+      ],
+      "dependencies": [
+        "LAB-03",
+        "LAB-04",
+        "LAB-05",
+        "LAB-06"
+      ],
+      "description": "Implement Consensus Is Not Independence from the versioned design specification.",
+      "acceptance_criteria": [
+        "Create objectively scorable synthetic ledger tasks and independent/recycled origins with explicit/hidden views.",
+        "Support repeated seeded trials and matched report count/wording; retain hidden operator ground truth.",
+        "Record answers/confidence/verification/corrections and deterministic evaluator outputs.",
+        "Test fixture ground truth, provenance visibility, error handling and complete artifact generation before any provider pilot."
+      ],
+      "status": "Backlog",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/9"
+    },
+    {
+      "id": "LAB-08",
+      "title": "Run and publish the EXP-001 pilot with reproducible artifacts",
+      "priority": "P1",
+      "labels": [
+        "lab",
+        "P1",
+        "experiment",
+        "reproducibility"
+      ],
+      "dependencies": [
+        "LAB-07"
+      ],
+      "description": "Produce the first real controlled evidence, including negative outcomes and limitations.",
+      "acceptance_criteria": [
+        "Start with 5 logical agents, then expand to 10 and 20 only after telemetry validation.",
+        "Produce manifest, config, prompts, agents, raw events, graph, metrics, results, hashes and analysis script.",
+        "Publish exact source commit, dependency install, recorded replay and fresh rerun commands with provider prerequisites.",
+        "Report all trials, failures, missingness, exclusions, negative results and pilot limitations; review artifacts before publication."
+      ],
+      "status": "Backlog",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/10"
+    },
+    {
+      "id": "LAB-09",
+      "title": "Publish real experiment and run inspection surfaces",
+      "priority": "P1",
+      "labels": [
+        "lab",
+        "P1",
+        "web",
+        "reproducibility"
+      ],
+      "dependencies": [
+        "LAB-08"
+      ],
+      "description": "Complete the visitor-facing evidence milestone using actual reviewed artifacts.",
+      "acceptance_criteria": [
+        "Back planned/running/completed experiment states with real versioned metadata.",
+        "Render per-run immutable manifest, timeline, events, graph, metrics and safe raw downloads.",
+        "Link model/provider/config, source commit, hashes, limitations and tested reproduction commands.",
+        "No fake counters or placeholder findings; retain unknown-run 404, hostile text escaping and existing public-memory protections."
+      ],
+      "status": "Backlog",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/11"
+    },
+    {
+      "id": "LAB-10",
+      "title": "Evaluate ADR ingestion and per-session detector baselines",
+      "priority": "P2",
+      "labels": [
+        "lab",
+        "P2",
+        "observability",
+        "research"
+      ],
+      "dependencies": [
+        "LAB-05"
+      ],
+      "description": "Compare population-aware analysis with existing sensor and detector work.",
+      "acceptance_criteria": [
+        "Study ADR AgentEvent and prototype an adapter to NeurosisEvent with documented missing fields.",
+        "Define a per-agent/per-session baseline interface for comparison with population-aware detection.",
+        "Evaluate reuse without forking ADR into the core or rebuilding a generic telemetry platform."
+      ],
+      "status": "Backlog",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/12"
+    },
+    {
+      "id": "LAB-11",
+      "title": "Specify and pilot EXP-009 emergent shared substrate detection",
+      "priority": "P2",
+      "labels": [
+        "lab",
+        "P2",
+        "experiment",
+        "security"
+      ],
+      "dependencies": [
+        "LAB-08",
+        "LAB-10"
+      ],
+      "description": "Investigate undeclared shared resources only after event and provenance semantics are trustworthy. EXP-002 remains the Sybil experiment.",
+      "acceptance_criteria": [
+        "Specify an isolated-agent environment with a controlled hidden shared cache and no declared messaging.",
+        "Implement a sandbox prototype and causal-gap heuristic with alternative explanations and negative controls.",
+        "Run a small pilot and rank candidate resources using recorded evidence, confidence and limitations.",
+        "Measure false positives and time to detection; distinguish candidate paths from proof of hidden coordination."
+      ],
+      "status": "Backlog",
+      "url": "https://github.com/Lucas-hX/Neurosis/issues/13"
+    }
+  ]
+}
