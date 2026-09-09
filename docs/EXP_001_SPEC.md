@@ -1,6 +1,6 @@
 # EXP-001 — Consensus Is Not Independence
 
-Status: design specification for implementation, not an implemented experiment or result. Version: draft-0. The first environment and harness are the next work items.
+Status: design specification for implementation, not an implemented experiment or result. Version: draft-0. The bounded harness exists; the controlled board, graph, environment, and evaluator are the next work items.
 
 ## Hypothesis and estimand
 

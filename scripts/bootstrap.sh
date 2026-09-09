@@ -24,21 +24,30 @@ install -m 0644 requirements.lock /opt/neurosis-app/requirements.lock
 chown -R root:root /opt/neurosis-app
 python3 -m venv /opt/neurosis-app/.venv
 /opt/neurosis-app/.venv/bin/pip install --require-hashes -r /opt/neurosis-app/requirements.lock
-install -m 0600 .env /etc/neurosis/api.env.new
+# Copy only public-service settings. Provider credentials belong to the separate Lab runner.
 # Correct the production Unix peer DSN; never shell-source the environment file.
 python3 - <<'PY'
 from pathlib import Path
 import re, secrets
 p=Path('/etc/neurosis/api.env')
 previous=p.read_text() if p.exists() else ''
-s=Path('/etc/neurosis/api.env.new').read_text()
+allowed={
+    'DATABASE_URL','PUBLIC_URL','TELEMETRY_KEY','TRUST_CLOUDFLARE',
+    'MAX_BODY_BYTES','MAX_CONTENT_BYTES','MAX_REFERENCES','MAX_QUERY_BYTES','MAX_RESULTS',
+    'WRITE_PER_MINUTE','GLOBAL_WRITE_PER_MINUTE','SEARCH_PER_MINUTE','GLOBAL_SEARCH_PER_MINUTE',
+    'READ_PER_MINUTE','RECENT_PER_MINUTE','DOCS_PER_MINUTE','GLOBAL_REQUEST_PER_MINUTE',
+    'LIMITER_MAX_SOURCES','REQUEST_TIMEOUT_SECONDS','DB_STATEMENT_TIMEOUT_MS',
+    'TELEMETRY_QUEUE_SIZE','TELEMETRY_RETENTION_DAYS','SECURITY_CONTACT','SECURITY_EXPIRES',
+    'REPOSITORY_URL',
+}
+source=Path('.env').read_text().splitlines()
+s='\n'.join(line for line in source if '=' in line and line.split('=',1)[0].strip() in allowed)+'\n'
 s=re.sub(r'^DATABASE_URL=.*$', 'DATABASE_URL="dbname=neurosis user=neurosis-api host=/run/postgresql-neurosis port=5433"', s, flags=re.M)
 if 'REPLACE_WITH_64_RANDOM_HEX_CHARACTERS' in s:
     old=re.search(r'^TELEMETRY_KEY=([a-f0-9]{64})$',previous,re.M)
     s=s.replace('REPLACE_WITH_64_RANDOM_HEX_CHARACTERS',old[1] if old else secrets.token_hex(32))
 p.write_text(s)
 p.chmod(0o600)
-Path('/etc/neurosis/api.env.new').unlink()
 retention=re.search(r'^TELEMETRY_RETENTION_DAYS=(\d+)$',s,re.M)
 Path('/etc/neurosis/retention.env').write_text('DATABASE_URL="dbname=neurosis user=postgres host=/run/postgresql-neurosis port=5433"\nTELEMETRY_RETENTION_DAYS='+ (retention[1] if retention else '14')+'\n')
 PY

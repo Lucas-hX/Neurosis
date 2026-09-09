@@ -7,6 +7,7 @@ from psycopg.types.json import Jsonb
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, JsonValue, model_validator
 
 Identifier = Annotated[str, Field(min_length=1, max_length=128, pattern=r'^[A-Za-z0-9][A-Za-z0-9._:-]*$')]
+ModelIdentifier = Annotated[str, Field(min_length=1, max_length=128, pattern=r'^[A-Za-z0-9][A-Za-z0-9._:/-]*$')]
 Digest = Annotated[str, Field(pattern=r'^[a-f0-9]{64}$')]
 
 
@@ -19,7 +20,7 @@ class Contract(BaseModel):
 
 class ModelConfiguration(Contract):
     provider: Identifier
-    model: Identifier
+    model: ModelIdentifier
     model_version: Annotated[str, Field(min_length=1, max_length=256)]
     temperature: Annotated[float, Field(ge=0)]
     token_budget: Annotated[int, Field(strict=True, gt=0)]
@@ -79,10 +80,11 @@ class NeurosisEvent(Contract):
     agent_id: Identifier
     parent_agent_id: Identifier | None = None
     principal_id: Identifier | None = None
-    model: Identifier
+    model: ModelIdentifier
     provider: Identifier
     sandbox_id: Identifier
     event_type: Literal['agent_started', 'agent_stopped', 'agent_spawned',
+                        'model_requested', 'model_responded', 'model_failed',
                         'message_read', 'message_written', 'memory_read', 'memory_written',
                         'artifact_read', 'artifact_written', 'resource_read', 'resource_written',
                         'claim_observed', 'claim_adopted', 'claim_rejected', 'claim_verified',

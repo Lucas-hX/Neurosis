@@ -1,12 +1,12 @@
 # Lab foundations v0
 
-This is the boundary at which EXP-001 implementation can start. No agent harness or controlled results exist yet. The public FastAPI app serves trusted planning pages at `/lab`, `/experiments`, and `/experiments/exp-001`, including Markdown mirrors. Unknown experiment and run URLs return 404; no placeholder run is presented as evidence.
+This foundation now supports the bounded LAB-03 population harness. No controlled environment or controlled result exists yet. The public FastAPI app serves trusted planning pages at `/lab`, `/experiments`, and `/experiments/exp-001`, including Markdown mirrors. Unknown experiment and run URLs return 404; no placeholder run is presented as evidence.
 
 ## Architecture and isolation
 
 Track A retains `memory.*` and private naturalistic `research.requests` telemetry. Migration `002_lab.sql` adds only `lab.runs` and `lab.events`; it changes no existing table or grant. The public API role receives no Lab privileges. No Lab ingestion endpoint or provider client is imported by the HTTP application. Its Unix-socket-only network isolation remains intact.
 
-The initial recorder imports concluded runs from a separately operated harness, using `LAB_DATABASE_URL` explicitly. It never falls back to the public application's `DATABASE_URL`. A future runner must stage raw events durably while it runs and then register the final manifest, including failures/cancellations and any recording gaps. Live ingestion/finalization is future work; do not claim this offline recorder captures a running provider session.
+The initial recorder imports concluded runs from the separately operated harness, using `LAB_DATABASE_URL` explicitly. It never falls back to the public application's `DATABASE_URL`. The harness stages prompt/configuration bytes before execution, fsyncs raw events while it runs, and writes the concluded manifest last, including ordinary failures and cancellations. An interrupted process can leave a staging directory without a manifest; retain it as evidence of an incomplete run. Live database ingestion/finalization is future work; do not claim the offline database recorder captures a running provider session.
 
 Lab experiments use a controlled board, not `/v1/engrams`. Separate database grants and operator processes enforce the normal path; an operator with superuser access can bypass database protections and remains a trust boundary. Do not give a future Lab role access to `memory` or `research`. Browser requests to Lab documentation are ordinary site visits, never experimental evidence. Public service counters measure requests, not organic adoption.
 
@@ -28,7 +28,7 @@ The immutable manifest describes a concluded run. Failed/cancelled runs remain r
 
 [Event schema](../schemas/event-v0.schema.json) is generated from the same Pydantic model used for ingestion. It rejects unknown top-level fields, non-finite numeric values, naive timestamps, malformed identifiers, self-parenting and duplicate parents. `metadata` is the JSON extension point, not a place to override canonical fields.
 
-Each event has event/run/population/experiment identity, timestamp, agent/model/provider/sandbox, typed source and target entities, an event type, and provenance. Optional principal, parent agent, resource, artifact, memory, claim, content hash and declared-channel fields support future adapters without depending on one provider.
+Each event has event/run/population/experiment identity, timestamp, agent/model/provider/sandbox, typed source and target entities, an event type, and provenance. The harness adds explicit `model_requested`, `model_responded`, and `model_failed` attempt events. Optional principal, parent agent, resource, artifact, memory, claim, content hash and declared-channel fields support future adapters without depending on one provider.
 
 Use actor → object for writes, object → actor for reads, and agent → claim for claim decisions. Read events mean observed access; `claim_adopted` means an explicit recorded answer/state transition, never an inference from a read. Tool calls record requested invocation, not presumed success. Put returned status/outcome in metadata. Entity IDs are scoped to a run unless a future adapter explicitly defines a cross-run identity mapping.
 

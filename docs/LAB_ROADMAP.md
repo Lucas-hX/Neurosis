@@ -6,11 +6,12 @@ The exact issue titles, bodies, priorities, labels, dependencies and acceptance 
 
 ## Implementation order
 
-1. LAB-01/02: public direction, contracts, isolated recorder (implemented in this worktree; pending integration).
-2. LAB-03/04/05: bounded harness, controlled board, graph and known-origin analysis.
-3. LAB-06/07: finalize the reviewable protocol and implement EXP-001.
-4. LAB-08/09: run a pilot, reproduce its artifacts, and publish real experiment/run pages.
-5. LAB-10/11: external sensors/baselines and EXP-009 hidden shared resources.
+1. LAB-01/02: public direction, contracts, isolated recorder (integrated).
+2. LAB-03: bounded provider-neutral harness and Groq adapters (implemented in this worktree; pending integration).
+3. LAB-04/05: controlled board, graph and known-origin analysis.
+4. LAB-06/07: finalize the reviewable protocol and implement EXP-001.
+5. LAB-08/09: run a pilot, reproduce its artifacts, and publish real experiment/run pages.
+6. LAB-10/11: external sensors/baselines and EXP-009 hidden shared resources.
 
 [EXP-001 design](EXP_001_SPEC.md) is ready to guide implementation. Provider/account selection and an explicit cost ceiling are required before a paid pilot, not to build the deterministic environment. The original catalogue retains EXP-002 for Sybil consensus and EXP-009 for emergent shared substrate detection.
 

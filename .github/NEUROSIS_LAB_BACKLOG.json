@@ -27,7 +27,7 @@
         "Serve Lab overview, planned experiment index/detail and Markdown mirrors without fabricated results.",
         "Run existing safety/content tests and verify navigation, metadata, sitemap and public API compatibility."
       ],
-      "status": "In Progress",
+      "status": "Done",
       "url": "https://github.com/Lucas-hX/Neurosis/issues/3"
     },
     {
@@ -51,7 +51,7 @@
         "Test invalid associations/ancestry, immutable IDs, rollback and public-role denial; document offline collection limits.",
         "Keep provider credentials and Lab ingestion outside the public HTTP application."
       ],
-      "status": "In Progress",
+      "status": "Done",
       "url": "https://github.com/Lucas-hX/Neurosis/issues/4"
     },
     {
@@ -75,7 +75,7 @@
         "Record all attempts, usage/cost where exposed, failed/cancelled runs and gaps; enforce token and monetary ceilings.",
         "No public-server egress expansion or dependency on a consumer UI subscription."
       ],
-      "status": "Backlog",
+      "status": "In Progress",
       "url": "https://github.com/Lucas-hX/Neurosis/issues/5"
     },
     {
