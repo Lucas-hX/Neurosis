@@ -15,5 +15,8 @@ __pycache__/
 !docs/RELATED_WORK.md
 !docs/LAB_FOUNDATIONS.md
 !docs/LAB_HARNESS.md
+!docs/LAB_BOARD_GRAPH.md
 !docs/LAB_ROADMAP.md
 !docs/EXP_001_SPEC.md
+!docs/EXP_001_RUNBOOK.md
+!experiments/exp-001/README.md
