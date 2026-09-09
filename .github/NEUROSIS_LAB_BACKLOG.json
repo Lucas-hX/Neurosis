@@ -75,7 +75,7 @@
         "Record all attempts, usage/cost where exposed, failed/cancelled runs and gaps; enforce token and monetary ceilings.",
         "No public-server egress expansion or dependency on a consumer UI subscription."
       ],
-      "status": "In Progress",
+      "status": "Done",
       "url": "https://github.com/Lucas-hX/Neurosis/issues/5"
     },
     {
@@ -97,7 +97,7 @@
         "Enforce no cross-run access and no writes to the public substrate.",
         "Support deterministic fixtures, explicit and hidden provenance views, and tests for leakage across views."
       ],
-      "status": "Backlog",
+      "status": "Done",
       "url": "https://github.com/Lucas-hX/Neurosis/issues/6"
     },
     {
@@ -121,7 +121,7 @@
         "Compute known origin count and CIR for controlled fixtures; missing provenance stays unknown and zero denominators undefined.",
         "Test independent origins, repeated origin, missing events, duplicate identities and graph replay; do not treat timestamps as causal proof."
       ],
-      "status": "Backlog",
+      "status": "Done",
       "url": "https://github.com/Lucas-hX/Neurosis/issues/7"
     },
     {
@@ -144,7 +144,7 @@
         "Record provider/version, actual token/cost ceiling and timeout policy before a paid run.",
         "Document scripted-reporter pilot limits, provenance leakage checks, and single-agent comparison needs."
       ],
-      "status": "Backlog",
+      "status": "Done",
       "url": "https://github.com/Lucas-hX/Neurosis/issues/8"
     },
     {
@@ -170,7 +170,7 @@
         "Record answers/confidence/verification/corrections and deterministic evaluator outputs.",
         "Test fixture ground truth, provenance visibility, error handling and complete artifact generation before any provider pilot."
       ],
-      "status": "Backlog",
+      "status": "Done",
       "url": "https://github.com/Lucas-hX/Neurosis/issues/9"
     },
     {

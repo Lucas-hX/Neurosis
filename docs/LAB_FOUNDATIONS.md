@@ -1,6 +1,6 @@
 # Lab foundations v0
 
-This foundation now supports the bounded LAB-03 population harness. No controlled environment or controlled result exists yet. The public FastAPI app serves trusted planning pages at `/lab`, `/experiments`, and `/experiments/exp-001`, including Markdown mirrors. Unknown experiment and run URLs return 404; no placeholder run is presented as evidence.
+This foundation now supports the bounded harness, isolated board, interaction graph, and frozen EXP-001 fixture environment. No provider pilot or controlled result exists yet. The public FastAPI app serves trusted planning pages at `/lab`, `/experiments`, and `/experiments/exp-001`, including Markdown mirrors. Unknown experiment and run URLs return 404; no placeholder run is presented as evidence.
 
 ## Architecture and isolation
 
@@ -57,13 +57,14 @@ These commands record/export artifacts; they do not run EXP-001. Ingestion is tr
 ```text
 runs/exp-001/<run_id>/
   manifest.json
-  config.yaml
+  config.json
   prompts/
   agents.json
   events.jsonl
   graph.json
   metrics.json
   results.csv
+  report.html
   SHA256SUMS
   README.md
 ```

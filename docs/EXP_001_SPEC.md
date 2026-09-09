@@ -1,6 +1,6 @@
 # EXP-001 — Consensus Is Not Independence
 
-Status: design specification for implementation, not an implemented experiment or result. Version: draft-0. The bounded harness exists; the controlled board, graph, environment, and evaluator are the next work items.
+Status: frozen pre-pilot protocol and implemented fixture environment, not an experimental result. Version: 1.0.0. The normative machine-readable protocol and exact prompts live under `experiments/exp-001/`; changes require a new version.
 
 ## Hypothesis and estimand
 
@@ -20,11 +20,11 @@ Randomize report order with a recorded seed. Pair the same task and report wordi
 
 ## Trials, budgets and stopping
 
-Initial implementation target: 5 logical agents per trial (4 reporters and one target). Use seeds 0–19, all eight cells per seed: 160 planned pilot trials. These are design choices, not executed sample counts. Reporters initially use scripted task fixtures; the target uses a provider adapter. Label this as a controlled target-agent pilot, not an autonomous swarm. A later all-model population extension uses 10 then 20 agents after telemetry checks.
+Each trial has 5 logical agents (4 scripted reporters and one target). Use seeds 0–19, all eight cells per seed: 160 planned pilot trials. These are frozen planned counts, not executed sample counts. The target uses Groq `openai/gpt-oss-120b`; reporter events identify their fixture provider. Label this as a controlled target-agent pilot, not an autonomous swarm. A later all-model population extension uses 10 then 20 agents after telemetry checks.
 
 Bound the target to 3 turns and 2 verification calls per trial, with a configurable maximum of 2,000 output tokens per call and concurrency at most 4. Before a paid run, record provider/model/version, prompts, token accounting, a total token and monetary ceiling, and timeout policy in the versioned config. Stop scheduling on budget exhaustion, isolation failure, or missing/corrupt recorder events. Record failures and cancelled trials. Allow at most two retries for transient provider errors, preserving every attempt and cost; never retry an unwanted scientific answer.
 
-Model selection and the paid-run ceiling are implementation-time operator inputs because no provider/account is chosen yet. They do not block building the environment. No API credentials are required to develop deterministic fixtures.
+The target uses temperature 0, low reasoning effort, hidden reasoning format, at most 256 output tokens and two turns. Per-trial, preflight and pilot ceilings are $0.02, $0.25 and $2.00. Provider pricing review, a provider-side spend limit, a rotated credential and a clean commit are launch gates. No API credential is required for deterministic fixtures.
 
 ## Measurements and evaluation
 

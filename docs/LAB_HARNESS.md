@@ -6,7 +6,7 @@ The LAB-03 harness is a separate operator process. It is not imported by the pub
 
 `LogicalAgent` records an agent ID, optional parent/principal IDs, sandbox ID, mutable synthetic state, conversation context, exact system and initial agent prompts, a model adapter, a maximum turn count, and an optional next-turn callback. A `ModelAdapter` declares its provider/model/settings, produces a conservative token and cost reservation before each call, and returns text, provider response ID, reported model/version information, finish reason, service tier, and usage.
 
-`DeterministicAdapter` is the credential-free test implementation. `GroqAdapter` calls [Groq Chat Completions](https://console.groq.com/docs/api-reference) directly with no tools and supports only the explicitly priced `openai/gpt-oss-20b` and `openai/gpt-oss-120b` model IDs. LAB-03 uses 20B for concurrency/failure diagnostics and reserves 120B for the future EXP-001 target. The request seed and returned `system_fingerprint` are recorded; Groq documents seeded output as best-effort rather than guaranteed determinism.
+`DeterministicAdapter` is the credential-free test implementation. `GroqAdapter` calls [Groq Chat Completions](https://console.groq.com/docs/api-reference) directly with no tools and supports only the explicitly priced `openai/gpt-oss-20b` and `openai/gpt-oss-120b` model IDs. LAB-03 uses 20B for concurrency/failure diagnostics; frozen EXP-001 uses 120B for its target. The request seed and returned `system_fingerprint` are recorded; Groq documents seeded output as best-effort rather than guaranteed determinism.
 
 The configured September 9, 2026 [Groq list prices](https://console.groq.com/docs/models) are $0.075/M input and $0.30/M output tokens for 20B, and $0.15/M input and $0.60/M output tokens for 120B. They are versioned in code and copied into each adapter configuration and reservation/cost record. Recheck pricing before a paid pilot. Calculated costs are labeled `configured_list_price`; Groq returns token usage but not a charged-dollar field.
 
@@ -22,7 +22,7 @@ Only transient failures are retried. Scientific answers are never retried merely
 
 Each attempt emits an immutable `model_requested` event followed by `model_responded` or `model_failed`. Events include exact model input, settings, reservations, output text or sanitized error type, usage, calculated cost, provider response ID, and reported backend fingerprint. Credentials and provider error bodies are excluded.
 
-`DirectoryRecorder` creates a new mode-0700 staging directory, saves exact prompt bytes under their SHA-256 names, writes `config.json` and `agents.json`, and fsyncs every JSONL event. It closes `events.jsonl`, then writes `results.json` and the immutable `manifest.json`. Existing output paths are rejected. A directory without `manifest.json` is an interrupted/incomplete staging record and must not be imported or presented as a run.
+`DirectoryRecorder` creates a new mode-0700 staging directory, saves exact prompt bytes under their SHA-256 names, writes `config.json` and `agents.json`, and fsyncs every JSONL event. It closes `events.jsonl`, writes results and optional derived artifacts, records every digest in `SHA256SUMS`, then writes the immutable `manifest.json` last. Existing output paths are rejected. A directory without `manifest.json` is an interrupted/incomplete staging record and must not be imported or presented as a run.
 
 Run the deterministic 20-agent diagnostic without credentials:
 
@@ -39,6 +39,6 @@ For a bounded Groq diagnostic, place `GROQ_API_KEY` in the ignored mode-0600 `.e
   --token-ceiling 50000 --cost-ceiling 0.05
 ```
 
-The CLI labels these as `EXP-000` harness diagnostics. They do not implement or produce evidence for EXP-001. Review local raw output before sharing it. The eventual controlled environment must supply its own prompts, state transitions, board instrumentation, evaluator, and run-bundle checksums.
+The CLI labels these as `EXP-000` harness diagnostics. They do not produce evidence for EXP-001. Review local raw output before sharing it. The EXP-001 environment supplies separate prompts, phased state transitions, board instrumentation, evaluator, graph and checksums through `python -m neurosis.exp001`.
 
-Diagnostics may run from a dirty development tree. In that case `config.json` records `source_worktree_dirty=true` and a SHA-256 digest of the tracked diff plus untracked source bytes. This identifies the local state but cannot reproduce files that were never committed. A publishable pilot must run from a clean, exact commit; future EXP-001 orchestration must enforce that gate.
+Diagnostics and fixture schedules may run from a dirty development tree. In that case `config.json` records `source_worktree_dirty=true` and a SHA-256 digest of the tracked diff plus untracked source bytes. This identifies the local state but cannot reproduce files that were never committed. EXP-001 provider execution rejects a dirty tree.

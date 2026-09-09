@@ -1,0 +1,4 @@
+Determine the bin for {object_id}. The shared board contains these four peer reports in seeded order:
+{reports_json}
+Available private-ledger lookup IDs: {lookup_ids_json}
+Return your initial answer using the required JSON schema. You may request at most two ledger lookups by placing listed object IDs in verify.

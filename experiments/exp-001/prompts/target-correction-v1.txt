@@ -1,0 +1,3 @@
+Verification phase. The private ledger tool returned:
+{verification_json}
+Return your final answer using the required JSON schema. Set verify to an empty array. If no lookup was requested, verification_json is an empty array.

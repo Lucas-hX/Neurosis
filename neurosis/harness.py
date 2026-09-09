@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
-from collections.abc import Awaitable, Callable, Sequence
+from collections.abc import Awaitable, Callable, Mapping, Sequence
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from decimal import Decimal
@@ -123,10 +123,13 @@ class LogicalAgent:
     parent_agent_id: str | None = None
     principal_id: str | None = None
     sandbox_id: str = 'lab-local'
+    phase: int = 0
 
     def __post_init__(self) -> None:
         if self.max_turns < 1:
             raise ValueError('max_turns must be positive')
+        if self.phase < 0:
+            raise ValueError('phase cannot be negative')
 
 
 @dataclass(frozen=True)
@@ -140,6 +143,7 @@ class RunPlan:
     adversarial_fraction: float = 0
     declared_channels: tuple[str, ...] = ()
     shared_resources: tuple[str, ...] = ()
+    experiment_config: dict[str, JsonValue] = field(default_factory=dict)
     source_worktree_dirty: bool = False
     source_diff_hash: str | None = None
     run_id: UUID = field(default_factory=uuid4)
@@ -195,6 +199,10 @@ class RunResult:
     stop_reason: str | None
 
 
+ArtifactBuilder = Callable[[Path, RunResult],
+                           Mapping[str, str] | Awaitable[Mapping[str, str]]]
+
+
 class Recorder(Protocol):
     async def start(self, config: str, agents: Sequence[LogicalAgent]) -> None: ...
     async def record(self, event: NeurosisEvent) -> None: ...
@@ -220,8 +228,9 @@ class MemoryRecorder:
 class DirectoryRecorder:
     """Fsync every raw event, then add the concluded manifest last."""
 
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, artifact_builder: ArtifactBuilder | None = None):
         self.path = path
+        self.artifact_builder = artifact_builder
         self._stream = None
         self._lock = asyncio.Lock()
 
@@ -248,7 +257,8 @@ class DirectoryRecorder:
                 'principal_id': agent.principal_id, 'sandbox_id': agent.sandbox_id,
                 'provider': agent.adapter.provider, 'model': agent.adapter.model,
                 'system_prompt_hash': system_hash, 'agent_prompt_hash': agent_hash,
-                'max_turns': agent.max_turns, 'initial_state': agent.state,
+                'max_turns': agent.max_turns, 'phase': agent.phase,
+                'initial_state': agent.state,
             })
         for digest, prompt in prompt_bytes.items():
             self._write_new(prompts / f'{digest}.txt', prompt)
@@ -277,7 +287,28 @@ class DirectoryRecorder:
             'agents': [vars(item) | {'responses': list(item.responses)} for item in result.agents],
         }
         self._write_new(self.path / 'results.json', canonical(payload) + '\n')
-        self._write_new(self.path / 'manifest.json', result.manifest.canonical_json() + '\n')
+        if self.artifact_builder:
+            artifacts = self.artifact_builder(self.path, result)
+            if inspect.isawaitable(artifacts):
+                artifacts = await artifacts
+            reserved = {'config.json', 'agents.json', 'events.jsonl', 'results.json',
+                        'manifest.json', 'SHA256SUMS'}
+            for name, content in sorted(artifacts.items()):
+                relative = Path(name)
+                if (relative.is_absolute() or '..' in relative.parts or name in reserved
+                        or relative.parts[0] == 'prompts'):
+                    raise ValueError(f'Unsafe or reserved artifact path: {name}')
+                destination = self.path / relative
+                destination.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+                self._write_new(destination, content)
+        manifest_text = result.manifest.canonical_json() + '\n'
+        checksums = []
+        for path in sorted(item for item in self.path.rglob('*') if item.is_file()):
+            relative = path.relative_to(self.path).as_posix()
+            checksums.append(f'{hashlib.sha256(path.read_bytes()).hexdigest()}  {relative}')
+        checksums.append(f'{hashlib.sha256(manifest_text.encode()).hexdigest()}  manifest.json')
+        self._write_new(self.path / 'SHA256SUMS', '\n'.join(checksums) + '\n')
+        self._write_new(self.path / 'manifest.json', manifest_text)
 
 
 class _Budget:
@@ -335,6 +366,7 @@ class PopulationRunner:
                 'adversarial_fraction': self.plan.adversarial_fraction,
                 'declared_channels': list(self.plan.declared_channels),
                 'shared_resources': list(self.plan.shared_resources),
+                'experiment_config': self.plan.experiment_config,
                 'source_worktree_dirty': self.plan.source_worktree_dirty,
                 'source_diff_hash': self.plan.source_diff_hash,
             },
@@ -531,9 +563,12 @@ class PopulationRunner:
         start_time = datetime.now(UTC)
         await self.recorder.start(config, agents)
         budget, semaphore = _Budget(self.limits), asyncio.Semaphore(self.limits.max_concurrency)
-        results = tuple(await asyncio.gather(*[
-            asyncio.create_task(self._run_agent(agent, semaphore, budget, cancel_event))
-            for agent in agents]))
+        collected: list[AgentResult] = []
+        for phase in sorted({agent.phase for agent in agents}):
+            collected.extend(await asyncio.gather(*[
+                asyncio.create_task(self._run_agent(agent, semaphore, budget, cancel_event))
+                for agent in agents if agent.phase == phase]))
+        results = tuple(collected)
         end_time = datetime.now(UTC)
         outcome = ('failed' if any(item.outcome == 'failed' for item in results)
                    else 'cancelled' if any(item.outcome == 'cancelled' for item in results)

@@ -1,19 +1,19 @@
 # NEUROSIS Lab — Phase 0/1
 
-The first evidence milestone is a visitor understanding the question, inspecting a real controlled experiment and causal trace/graph, and reproducing it from the repository. This pass establishes the foundation to start building that experiment. No pilot has run.
+The first evidence milestone is a visitor understanding the question, inspecting a real controlled experiment and causal trace/graph, and reproducing it from the repository. The environment and recorded-replay path are implemented. No provider pilot has run.
 
 The exact issue titles, bodies, priorities, labels, dependencies and acceptance criteria live in [the importable backlog](../.github/NEUROSIS_LAB_BACKLOG.json). GitHub Projects access is unavailable with the current token; the file preserves the board columns and import data without requesting broader credentials.
 
 ## Implementation order
 
 1. LAB-01/02: public direction, contracts, isolated recorder (integrated).
-2. LAB-03: bounded provider-neutral harness and Groq adapters (implemented in this worktree; pending integration).
-3. LAB-04/05: controlled board, graph and known-origin analysis.
-4. LAB-06/07: finalize the reviewable protocol and implement EXP-001.
-5. LAB-08/09: run a pilot, reproduce its artifacts, and publish real experiment/run pages.
+2. LAB-03: bounded provider-neutral harness and Groq adapters (integrated).
+3. LAB-04/05: controlled board, graph and known-origin analysis (implemented).
+4. LAB-06/07: frozen protocol, seeded environment, evaluator and recorded replay (implemented).
+5. LAB-08/09: run a reviewed provider pilot and publish real experiment/run pages (next).
 6. LAB-10/11: external sensors/baselines and EXP-009 hidden shared resources.
 
-[EXP-001 design](EXP_001_SPEC.md) is ready to guide implementation. Provider/account selection and an explicit cost ceiling are required before a paid pilot, not to build the deterministic environment. The original catalogue retains EXP-002 for Sybil consensus and EXP-009 for emergent shared substrate detection.
+[EXP-001 protocol](EXP_001_SPEC.md) and its [pre-pilot runbook](EXP_001_RUNBOOK.md) govern the implementation. Groq 120B is selected for the target, with explicit per-trial/preflight/pilot ceilings. A rotated credential, current price review and provider-side spend limit remain paid-launch gates. The original catalogue retains EXP-002 for Sybil consensus and EXP-009 for emergent shared substrate detection.
 
 ## Review and completion gates
 

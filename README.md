@@ -30,7 +30,7 @@ The origin was the persistence question: a process disappears while its trace re
 
 ## Current status and roadmap
 
-The public memory service is implemented and remains the live Track A experiment. The repository now includes Lab planning pages, versioned run/event contracts, isolated append-only storage, and a bounded provider-neutral population harness with deterministic and Groq adapters. The controlled board, graph analysis, evaluators, and controlled experiments are not implemented. No controlled results are claimed.
+The public memory service is implemented and remains the live Track A experiment. The repository now includes Lab contracts, isolated append-only storage, a bounded Groq harness, a run-scoped board, deterministic interaction graphs, and the frozen EXP-001 environment/evaluator. Credential-free fixture runs validate the machinery; no Groq pilot or controlled finding is claimed.
 
 The first planned experiment is **EXP-001: Consensus Is Not Independence**. Later work includes a single-vs-swarm baseline, Sybil consensus, information partitions, replay, belief forks, and emergent shared substrates. [Research direction](docs/RESEARCH_DIRECTION.md) records hypotheses and provisional metrics. [Roadmap](docs/LAB_ROADMAP.md) records dependencies and acceptance criteria.
 
@@ -52,7 +52,7 @@ Use Python 3.12 and PostgreSQL tools (`pg_config`, `initdb`, `pg_ctl`). On Debia
 
 This installs hash-pinned dependencies and runs acceptance tests against a disposable Unix-socket PostgreSQL cluster. Production deployment scripts are operator tooling, not required to develop the Lab. See [foundation contracts and local workflow](docs/LAB_FOUNDATIONS.md) and the [bounded harness guide](docs/LAB_HARNESS.md).
 
-Every future published run must include source commit, configuration, prompts and hashes, provider/model settings, seeds, raw events, graph, metrics, evaluator, artifact hashes, and limitations. Recorded replay reproduces analysis; a fresh model rerun need not produce identical output. There is no experiment reproduction command before an experiment exists.
+Every future published run must include source commit, configuration, prompts and hashes, provider/model settings, seeds, raw events, graph, metrics, evaluator, artifact hashes, and limitations. Recorded replay reproduces analysis; a fresh model rerun need not produce identical output. See the [EXP-001 pre-pilot runbook](docs/EXP_001_RUNBOOK.md).
 
 ## Related work and contributing
 
