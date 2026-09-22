@@ -106,7 +106,7 @@ def test_lab_public_pages(client):
     home = client.get('/').text
     assert 'Independent AI Security Research' in home and 'StaleAction' in home
     assert 'VLM Security' in home and 'VLA &amp; Robot Security' in home
-    assert 'Memory &amp; Provenance' in home and 'robot-vla-hero.webp' in home
+    assert 'Memory &amp; Provenance' in home and 'signal-field.svg' in home
     assert 'href="/recent"' in home and 'href="/papers"' in home
     assert 'NEUROSIS Research — Independent AI Security Research</title>' in home
     assert '/lab.md' in client.get('/llms.txt').text and '/papers/staleaction.md' in client.get('/llms.txt').text
@@ -114,10 +114,15 @@ def test_lab_public_pages(client):
         assert client.get(path).status_code == 200
         assert client.get(path + '.md').status_code == 200
         assert path in client.get('/sitemap.xml').text
-    assert client.get('/papers/staleaction/draft-v0.1.pdf').headers['content-type'] == 'application/pdf'
-    full_paper = client.get('/papers/staleaction/draft-v0.1.html')
-    assert full_paper.status_code == 200 and 'href="/paper.css"' in full_paper.text
-    assert client.get('/paper.css').headers['content-type'].startswith('text/css')
+    for path in ('/papers/staleaction/draft-v0.1.pdf',
+                 '/papers/staleaction/draft-v0.1.html', '/paper.css'):
+        assert client.get(path).status_code == 404
+    for path in ('/', '/papers', '/papers/staleaction', '/llms.txt'):
+        assert 'draft-v0.1.pdf' not in client.get(path).text
+        assert 'draft-v0.1.html' not in client.get(path).text
+    for path in ('/assets/neurosis-mark.svg', '/assets/signal-field.svg', '/favicon.svg'):
+        asset = client.get(path)
+        assert asset.status_code == 200 and asset.headers['content-type'].startswith('image/svg+xml')
     hero = client.get('/assets/robot-vla-hero.webp')
     assert hero.status_code == 200 and hero.headers['content-type'] == 'image/webp'
     assert set(client.get('/openapi.json').json()['paths']) == {

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" role="img" aria-labelledby="title desc">
+<title id="title">NEUROSIS signal mark</title><desc id="desc">Fine orbital traces converge on a crimson signal core along a vertical axis.</desc>
+<defs><radialGradient id="glow"><stop stop-color="#e11d2e" stop-opacity=".5"/><stop offset="1" stop-color="#e11d2e" stop-opacity="0"/></radialGradient></defs>
+<circle cx="120" cy="150" r="80" fill="url(#glow)"/>
+<g fill="none" stroke="#7d8588" stroke-width=".7" opacity=".7"><circle cx="120" cy="150" r="107" stroke-dasharray="1 5"/><circle cx="120" cy="150" r="71" stroke-dasharray="1 4"/><path d="M120 10v280" stroke="#d8d4ce" stroke-width="1.2"/><path d="M120 42C116 99 57 92 57 150s59 51 63 108M120 42c4 57 63 50 63 108s-59 51-63 108"/><path d="M120 50C109 98 76 109 76 150s33 52 44 100M120 50c11 48 44 59 44 100s-33 52-44 100"/><path d="M120 67C101 113 43 111 43 150s58 37 77 83M120 67c19 46 77 44 77 83s-58 37-77 83"/><path d="M120 85C95 122 34 120 34 150s61 28 86 65M120 85c25 37 86 35 86 65s-61 28-86 65"/><path d="M18 150h204" stroke-dasharray="2 5" opacity=".5"/></g>
+<g fill="#f0ede7"><circle cx="120" cy="42" r="2.3"/><circle cx="120" cy="92" r="3"/><circle cx="120" cy="214" r="2.5"/><circle cx="120" cy="258" r="2.3"/></g>
+<g fill="#e11d2e"><circle cx="120" cy="10" r="3"/><circle cx="120" cy="67" r="2.5"/><circle cx="120" cy="150" r="6"/><circle cx="120" cy="233" r="2.5"/><circle cx="120" cy="290" r="3"/></g>
+<path d="M120 122l4 24 23 4-23 4-4 24-4-24-23-4 23-4z" fill="#e11d2e" opacity=".9"/>
+</svg>

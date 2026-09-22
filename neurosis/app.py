@@ -89,10 +89,10 @@ def page(title, body, canonical=None):
 {canonical}<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="stylesheet" href="/style.css"></head><body class="{'home' if is_home else 'interior'}">
 <a class="skip-link" href="#content">Skip to content</a>
-<header class="site-header"><a class="brand" href="/" aria-label="NEUROSIS Research home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">NEUROSIS <small>Research</small></span><span class="brand-tagline">Independent AI Security Research</span></a>
+<header class="site-header"><a class="brand" href="/" aria-label="NEUROSIS Research home"><img class="brand-mark" src="/assets/neurosis-mark.svg" alt=""><span class="brand-name">NEUROSIS <small>Research</small></span><span class="brand-tagline">Independent AI Security Research</span></a>
 <nav aria-label="Primary"><a href="/research">Research</a><a href="/research#embodied-systems">VLM &amp; Robots</a><a href="/papers">Papers</a><a href="/experiments">Experiments</a><a href="/about">About</a><a class="nav-memory" href="/recent">Open memory</a></nav></header>
 <main id="content">{main}</main>
-<footer><div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">NEUROSIS <small>Research</small></span></a><p>Independent research on the security of autonomous and embodied intelligent systems.</p></div><div class="footer-links"><a href="/research">Research</a><a href="/papers">Papers</a><a href="/lab">Agent Systems Lab</a><a href="/docs/api">Memory API</a><a href="/safety">Safety</a><a href="https://github.com/Lucas-hX/Neurosis">GitHub</a></div><p class="footer-note">© 2026 NEUROSIS Research. Research artifacts are published with explicit evidence and status labels.</p></footer></body></html>''')
+<footer><div><a class="brand footer-brand" href="/"><img class="brand-mark" src="/assets/neurosis-mark.svg" alt=""><span class="brand-name">NEUROSIS <small>Research</small></span></a><p>Independent research on the security of autonomous and embodied intelligent systems.</p></div><div class="footer-links"><a href="/research">Research</a><a href="/papers">Papers</a><a href="/lab">Agent Systems Lab</a><a href="/docs/api">Memory API</a><a href="/safety">Safety</a><a href="https://github.com/Lucas-hX/Neurosis">GitHub</a></div><p class="footer-note">© 2026 NEUROSIS Research. Research artifacts are published with explicit evidence and status labels.</p></footer></body></html>''')
 
 
 def create_app(settings=None):
@@ -339,17 +339,14 @@ def create_app(settings=None):
             return Response(text, media_type='text/markdown', headers={'Link':link + ', <' + s.public_url + canonical_route + '>; rel="canonical"'})
         if route == '/style.css':
             return Response((PUBLIC/'style.css').read_text(), media_type='text/css')
-        if route == '/paper.css':
-            return Response((PUBLIC/'paper.css').read_text(), media_type='text/css')
         if route == '/assets/robot-vla-hero.webp':
             return FileResponse(PUBLIC/'assets'/'robot-vla-hero.webp', media_type='image/webp')
+        if route == '/assets/neurosis-mark.svg':
+            return Response((PUBLIC/'assets'/'neurosis-mark.svg').read_text(), media_type='image/svg+xml')
+        if route == '/assets/signal-field.svg':
+            return Response((PUBLIC/'assets'/'signal-field.svg').read_text(), media_type='image/svg+xml')
         if route == '/favicon.svg':
             return Response((PUBLIC/'favicon.svg').read_text(), media_type='image/svg+xml')
-        if route == '/papers/staleaction/draft-v0.1.pdf':
-            return FileResponse(PUBLIC/'papers'/'staleaction-draft-v0.1.pdf', media_type='application/pdf',
-                                filename='StaleAction-draft-v0.1.pdf')
-        if route == '/papers/staleaction/draft-v0.1.html':
-            return FileResponse(PUBLIC/'papers'/'staleaction-draft-v0.1.html', media_type='text/html')
         if route == '/robots.txt':
             return Response('User-agent: *\nAllow: /\n\nSitemap: '+s.public_url+'/sitemap.xml\n', media_type='text/plain')
         if route == '/sitemap.xml':

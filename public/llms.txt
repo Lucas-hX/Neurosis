@@ -14,8 +14,7 @@ Research artifacts distinguish hypotheses, plans, observations, validated findin
 
 ## Working paper
 
-- [StaleAction](https://neurosis.io/papers/staleaction.md): Physical TOCTOU Attacks Against Vision-Language-Action Robots. Draft v0.1; concept and positioning only; no empirical results claimed.
-- [StaleAction PDF](https://neurosis.io/papers/staleaction/draft-v0.1.pdf): Downloadable draft.
+- [StaleAction](https://neurosis.io/papers/staleaction.md): Physical TOCTOU Attacks Against Vision-Language-Action Robots. Public concept preview; full draft is not yet released and no empirical results are claimed.
 
 ## Agent systems and public memory
 

@@ -7,13 +7,13 @@ Research program
   <section><p class="status">Physical action</p><h3>VLA &amp; Robot Security</h3><p>We study action chunking, stale observations, physical TOCTOU, runtime revalidation, robotic control interfaces, and attacks that cross from model decisions into physical outcomes.</p></section>
 </div>
 <p>StaleAction is the first bridge project in this direction. It asks whether a robot can observe a legitimate scene, commit to an action, and then act incorrectly because the relevant physical state changed after observation.</p>
-<p><a class="button" href="/papers/staleaction">Read the StaleAction working paper</a></p>
+<p><a class="button" href="/papers/staleaction">Preview StaleAction</a></p>
 <h2 id="areas">Research areas</h2>
 <div class="research-grid">
-  <section><h3>Agent Security</h3><p>Autonomous LLM systems, tool use, agent loops, sandboxing, authority boundaries, prompt injection, state manipulation, and long-horizon behavior.</p></section>
-  <section><h3>Memory &amp; Provenance</h3><p>Machine memory, retrieval, reconsolidation, poisoning, provenance, shared knowledge, correlated evidence, persistence, and cross-agent propagation.</p></section>
-  <section><h3>Multi-Agent Systems</h3><p>Coordination, collective behavior, shared state, consensus, adversarial propagation, emergent substrates, Byzantine behavior, and population-level security.</p></section>
-  <section><h3>Embodied &amp; Physical AI</h3><p>VLM and VLA systems, physical prompt injection, perception-to-action boundaries, robot security, autonomous systems, and hostile interaction with physical environments.</p></section>
+  <section><p class="status">01 / Perception</p><h3>VLM Security</h3><p>Multimodal attacks, physical prompt injection, scene manipulation, grounding, and adversarial perception.</p></section>
+  <section><p class="status">02 / Physical action</p><h3>VLA &amp; Robot Security</h3><p>Action freshness, physical TOCTOU, runtime validation, robotics, and perception-to-action failures.</p></section>
+  <section><p class="status">03 / Autonomous systems</p><h3>Agent &amp; Multi-Agent Security</h3><p>Tool use, authority boundaries, coordination, shared state, adversarial propagation, and emergent behavior.</p></section>
+  <section><p class="status">04 / Persistent state</p><h3>Memory &amp; Provenance</h3><p>Retrieval, poisoning, lineage, correlated evidence, persistence, and cross-agent propagation.</p></section>
 </div>
 <h2 id="continuity">A continuous security model</h2>
 <p>Memory failures and embodied failures share a central structure: a system acts on a representation of reality that may no longer be trustworthy. A stored representation can be stale, poisoned, duplicated, or incorrectly sourced. A physical representation can become stale between perception and action.</p>
@@ -26,6 +26,6 @@ Research program
 <h3>Open and evidence-aware</h3><p>We make work public when responsible disclosure and safety permit, and label hypotheses, observations, findings, negative results, and speculation clearly.</p>
 <h2 id="programs">Active programs</h2>
 <div class="program-grid">
-  <article class="program-card"><p class="status">Embodied AI · Working paper</p><h3>StaleAction</h3><p>Physical TOCTOU attacks against Vision-Language-Action robots, with proposed measures for Observation–Action Age and the Adversarial Freshness Window.</p><a href="/papers/staleaction">Read the draft</a></article>
+  <article class="program-card"><p class="status">VLA &amp; Robot Security · Working paper preview</p><h3>StaleAction</h3><p>Physical TOCTOU attacks against Vision-Language-Action robots, with proposed measures for Observation–Action Age and the Adversarial Freshness Window.</p><a href="/papers/staleaction">Preview the concept</a></article>
   <article class="program-card"><p class="status">Agent systems · Active infrastructure</p><h3>Persistent state &amp; agent populations</h3><p>Public memory, provenance-aware experiments, collective behavior, and security failures that appear across agents and runs.</p><a href="/lab">Explore the Agent Systems Lab</a></article>
 </div>

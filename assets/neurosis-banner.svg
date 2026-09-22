@@ -1,17 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
-  <title id="title">NEUROSIS Research — Independent AI Security Research</title>
-  <desc id="desc">NEUROSIS Research wordmark beside a red signal field on a dark background.</desc>
-  <rect width="1200" height="320" rx="8" fill="#090b0d"/>
-  <g opacity=".42" stroke="#373e44" fill="none">
-    <circle cx="968" cy="160" r="124"/><circle cx="968" cy="160" r="82"/><circle cx="968" cy="160" r="39"/>
-    <path d="M844 160h248M968 36v248M876 77l184 166M1064 80L872 242"/>
-  </g>
-  <g fill="#ed2638"><circle cx="968" cy="160" r="5"/><circle cx="1078" cy="116" r="4"/><circle cx="908" cy="246" r="4"/></g>
-  <path d="M67 108v104M82 108v104" stroke="#ed2638" stroke-width="4"/>
-  <g fill="#f0ede7">
-    <text x="122" y="166" font-family="Georgia, serif" font-size="62" letter-spacing="6">NEUROSIS</text>
-    <text x="483" y="166" font-family="Georgia, serif" font-size="36" fill="#9ba1a7">Research</text>
-  </g>
-  <text x="124" y="199" font-family="monospace" font-size="12" letter-spacing="4" fill="#9ba1a7">INDEPENDENT AI SECURITY RESEARCH</text>
-  <text x="1110" y="291" text-anchor="end" font-family="monospace" font-size="10" letter-spacing="2" fill="#686f76">MEMORY · AGENTS · EMBODIMENT · ACTION</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc"><title id="title">NEUROSIS Research — independent AI security research</title><desc id="desc">Fine signal traces converge on a crimson core beside the wordmark and four research areas.</desc><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#2e3436" stroke-width=".5"/></pattern></defs><rect width="1200" height="360" fill="#0b0c0e"/><rect width="1200" height="360" fill="url(#grid)" opacity=".35"/><path d="M40 38h1120M40 318h1120" stroke="#343a3b"/><g transform="translate(50 -13) scale(1.28)"><defs><radialGradient id="glow"><stop stop-color="#e11d2e" stop-opacity=".5"/><stop offset="1" stop-color="#e11d2e" stop-opacity="0"/></radialGradient></defs>
+<circle cx="120" cy="150" r="80" fill="url(#glow)"/>
+<g fill="none" stroke="#7d8588" stroke-width=".7" opacity=".7"><circle cx="120" cy="150" r="107" stroke-dasharray="1 5"/><circle cx="120" cy="150" r="71" stroke-dasharray="1 4"/><path d="M120 10v280" stroke="#d8d4ce" stroke-width="1.2"/><path d="M120 42C116 99 57 92 57 150s59 51 63 108M120 42c4 57 63 50 63 108s-59 51-63 108"/><path d="M120 50C109 98 76 109 76 150s33 52 44 100M120 50c11 48 44 59 44 100s-33 52-44 100"/><path d="M120 67C101 113 43 111 43 150s58 37 77 83M120 67c19 46 77 44 77 83s-58 37-77 83"/><path d="M120 85C95 122 34 120 34 150s61 28 86 65M120 85c25 37 86 35 86 65s-61 28-86 65"/><path d="M18 150h204" stroke-dasharray="2 5" opacity=".5"/></g>
+<g fill="#f0ede7"><circle cx="120" cy="42" r="2.3"/><circle cx="120" cy="92" r="3"/><circle cx="120" cy="214" r="2.5"/><circle cx="120" cy="258" r="2.3"/></g>
+<g fill="#e11d2e"><circle cx="120" cy="10" r="3"/><circle cx="120" cy="67" r="2.5"/><circle cx="120" cy="150" r="6"/><circle cx="120" cy="233" r="2.5"/><circle cx="120" cy="290" r="3"/></g>
+<path d="M120 122l4 24 23 4-23 4-4 24-4-24-23-4 23-4z" fill="#e11d2e" opacity=".9"/>
+</g><text x="385" y="153" font-family="Georgia,serif" font-size="75" letter-spacing="4" fill="#f0ede7">NEUROSIS</text><text x="387" y="216" font-family="Georgia,serif" font-size="54" fill="#aeb1b0">Research</text><path d="M388 246h35" stroke="#e11d2e" stroke-width="3"/><text x="445" y="250" font-family="monospace" font-size="12" letter-spacing="4" fill="#c1c4c2">INDEPENDENT AI SECURITY RESEARCH</text><path d="M906 85v185" stroke="#343a3b"/><g font-family="monospace" font-size="9" letter-spacing="1.1" fill="#c1c4c2"><text x="944" y="108">01 / VLM SECURITY</text><text x="944" y="152">02 / VLA &amp; ROBOT SECURITY</text><text x="944" y="196">03 / AGENT &amp; MULTI-AGENT SECURITY</text><text x="944" y="240">04 / MEMORY &amp; PROVENANCE</text></g><g fill="#e11d2e"><rect x="924" y="99" width="5" height="5"/><rect x="924" y="143" width="5" height="5"/><rect x="924" y="187" width="5" height="5"/><rect x="924" y="231" width="5" height="5"/></g><text x="42" y="342" font-family="monospace" font-size="9" letter-spacing="2.5" fill="#777f80">MEMORY  →  AGENTS  →  PERCEPTION  →  PHYSICAL ACTION</text><text x="1158" y="342" text-anchor="end" font-family="monospace" font-size="9" letter-spacing="2.5" fill="#777f80">NEUROSIS.IO</text></svg>
