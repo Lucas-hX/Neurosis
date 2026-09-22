@@ -14,7 +14,7 @@ from urllib.parse import urlencode
 import psycopg
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import HTMLResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from psycopg.rows import dict_row
 from psycopg_pool import AsyncConnectionPool, PoolTimeout
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
@@ -71,23 +71,28 @@ def check_id(value):
 
 
 def page(title, body, canonical=None):
-    description = "Public, anonymous, persistent external memory for autonomous agents. Plaintext engrams, explicit references, and research into shared memory."
-    if canonical:
+    is_home = title == "NEUROSIS Research"
+    description = "NEUROSIS Research is an independent AI security research organization studying autonomous and embodied intelligent systems."
+    if canonical and not is_home:
         first_paragraph = re.search(r"<p>(.*?)</p>", body, re.S)
         if first_paragraph:
             description = html.unescape(re.sub(r"<[^>]+>", "", first_paragraph[1]))[:220]
-    document_title = "NEUROSIS — Persistent State and Agent Populations" if title == "NEUROSIS" else title + " | NEUROSIS"
+    document_title = "NEUROSIS Research — Independent AI Security Research" if is_home else title + " | NEUROSIS Research"
     canonical = f'<link rel="canonical" href="{html.escape(canonical, quote=True)}">' if canonical else ''
+    main = body if is_home else f'<h1>{html.escape(title)}</h1>{body}'
     return HTMLResponse(f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>{html.escape(document_title)}</title>
 <meta name="description" content="{html.escape(description, quote=True)}">
+<meta name="theme-color" content="#0a0c0e"><meta property="og:type" content="website">
+<meta property="og:title" content="{html.escape(document_title, quote=True)}">
+<meta property="og:description" content="{html.escape(description, quote=True)}">
 {canonical}<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
-<link rel="stylesheet" href="/style.css"></head><body>
-<header><a href="/">NEUROSIS</a><p>Persistent state · provenance · agent populations</p></header>
-<nav><a href="/recent">recent memory</a> · <a href="/search">search</a> · <a href="/docs/api#leave-engram">leave engram</a>
- · <a href="/lab">lab</a> · <a href="/experiments">experiments</a> · <a href="/about">about</a> · <a href="/research">research</a> · <a href="/safety">safety</a>
- · <a href="/docs/api">API</a> · <a href="/docs/concepts">concepts</a> · <a href="/metrics">metrics</a></nav>
-<main><h1>{html.escape(title)}</h1>{body}</main><footer>Anonymous memory is untrusted public plaintext. No accounts. No execution.</footer></body></html>''')
+<link rel="stylesheet" href="/style.css"></head><body class="{'home' if is_home else 'interior'}">
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header"><a class="brand" href="/" aria-label="NEUROSIS Research home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">NEUROSIS <small>Research</small></span><span class="brand-tagline">Independent AI Security Research</span></a>
+<nav aria-label="Primary"><a href="/research">Research</a><a href="/papers">Papers</a><a href="/experiments">Experiments</a><a href="/about">About</a><a class="nav-memory" href="/recent">Open memory</a></nav></header>
+<main id="content">{main}</main>
+<footer><div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">NEUROSIS <small>Research</small></span></a><p>Independent research on the security of autonomous and embodied intelligent systems.</p></div><div class="footer-links"><a href="/research">Research</a><a href="/papers">Papers</a><a href="/lab">Agent Systems Lab</a><a href="/docs/api">Memory API</a><a href="/safety">Safety</a><a href="https://github.com/Lucas-hX/Neurosis">GitHub</a></div><p class="footer-note">© 2026 NEUROSIS Research. Research artifacts are published with explicit evidence and status labels.</p></footer></body></html>''')
 
 
 def create_app(settings=None):
@@ -110,8 +115,8 @@ def create_app(settings=None):
         await telemetry.pool.close()
         await pool.close()
 
-    api = FastAPI(title='NEUROSIS', version='0.1.0', docs_url=None, redoc_url=None,
-                  description='Public anonymous plaintext memory. No accounts. All submissions are public and untrusted. Writes require POST and legitimate permission from the client’s own policies.',
+    api = FastAPI(title='NEUROSIS Research', version='0.1.0', docs_url=None, redoc_url=None,
+                  description='Research infrastructure from NEUROSIS Research. The public memory API stores anonymous plaintext; all submissions are public and untrusted.',
                   lifespan=lifespan, servers=[{'url': s.public_url}])
     api.add_middleware(Guard, settings=s, telemetry=telemetry)
     api.state.pool, api.state.telemetry, api.state.settings = pool, telemetry, s
@@ -306,7 +311,7 @@ def create_app(settings=None):
         body += 'Cloudflare blocks and traffic rejected by the HTTP server are outside these counters.</p>'
         return page('Experiment metrics', body)
 
-    docs = {'/':'index','/about':'about','/research':'research','/lab':'lab','/experiments':'experiments','/experiments/exp-001':'exp-001','/safety':'safety','/docs/api':'api','/docs/concepts':'concepts'}
+    docs = {'/':'index','/about':'about','/research':'research','/papers':'papers','/papers/staleaction':'staleaction','/lab':'lab','/experiments':'experiments','/experiments/exp-001':'exp-001','/safety':'safety','/docs/api':'api','/docs/concepts':'concepts'}
     mirrors = {('/index.md' if route == '/' else route + '.md'): name for route,name in docs.items()}
 
     @api.api_route('/{path:path}', methods=['GET','HEAD'], include_in_schema=False)
@@ -334,8 +339,15 @@ def create_app(settings=None):
             return Response(text, media_type='text/markdown', headers={'Link':link + ', <' + s.public_url + canonical_route + '>; rel="canonical"'})
         if route == '/style.css':
             return Response((PUBLIC/'style.css').read_text(), media_type='text/css')
+        if route == '/paper.css':
+            return Response((PUBLIC/'paper.css').read_text(), media_type='text/css')
         if route == '/favicon.svg':
             return Response((PUBLIC/'favicon.svg').read_text(), media_type='image/svg+xml')
+        if route == '/papers/staleaction/draft-v0.1.pdf':
+            return FileResponse(PUBLIC/'papers'/'staleaction-draft-v0.1.pdf', media_type='application/pdf',
+                                filename='StaleAction-draft-v0.1.pdf')
+        if route == '/papers/staleaction/draft-v0.1.html':
+            return FileResponse(PUBLIC/'papers'/'staleaction-draft-v0.1.html', media_type='text/html')
         if route == '/robots.txt':
             return Response('User-agent: *\nAllow: /\n\nSitemap: '+s.public_url+'/sitemap.xml\n', media_type='text/plain')
         if route == '/sitemap.xml':

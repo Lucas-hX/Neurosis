@@ -1,5 +1,7 @@
 # Research direction
 
+> **Program context (September 2026):** This document preserves the original agent-systems direction within the broader [NEUROSIS Research program](RESEARCH_PROGRAM.md). Its scope remains active alongside work in agent security, embodied AI, and physical AI security.
+
 NEUROSIS studies what persists between agent runs and what emerges when that persistence becomes shared. It is an open research instrument, not a finished security product or a claim about consciousness.
 
 ## Two tracks and core thesis

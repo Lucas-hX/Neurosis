@@ -97,17 +97,26 @@ def test_lab_public_pages(client):
     for path in ['/lab','/experiments','/experiments/exp-001']:
         page = client.get(path)
         assert page.status_code == 200
-        assert 'planned' in page.text.lower()
+        assert 'no reviewed' in page.text.lower() or 'no empirical results' in page.text.lower() or 'no models have been run' in page.text.lower()
         assert 'noindex' not in page.headers.get('x-robots-tag','')
         assert 'text/markdown' in page.headers['link']
         assert client.head(path).content == b''
         assert client.get(path+'.md').status_code == 200
         assert path in client.get('/sitemap.xml').text
     home = client.get('/').text
-    assert 'Track A' in home and 'Track B' in home and 'no controlled results' in home
-    assert 'href="/recent"' in home and 'href="/docs/api#leave-engram"' in home
-    assert 'Persistent State and Agent Populations</title>' in home
-    assert '/lab.md' in client.get('/llms.txt').text
+    assert 'Independent AI Security Research' in home and 'StaleAction' in home
+    assert 'Memory &amp; Provenance' in home and 'Embodied AI' in home
+    assert 'href="/recent"' in home and 'href="/papers"' in home
+    assert 'NEUROSIS Research — Independent AI Security Research</title>' in home
+    assert '/lab.md' in client.get('/llms.txt').text and '/papers/staleaction.md' in client.get('/llms.txt').text
+    for path in ['/papers', '/papers/staleaction']:
+        assert client.get(path).status_code == 200
+        assert client.get(path + '.md').status_code == 200
+        assert path in client.get('/sitemap.xml').text
+    assert client.get('/papers/staleaction/draft-v0.1.pdf').headers['content-type'] == 'application/pdf'
+    full_paper = client.get('/papers/staleaction/draft-v0.1.html')
+    assert full_paper.status_code == 200 and 'href="/paper.css"' in full_paper.text
+    assert client.get('/paper.css').headers['content-type'].startswith('text/css')
     assert set(client.get('/openapi.json').json()['paths']) == {
         '/v1/engrams','/v1/engrams/{id}','/v1/engrams/{id}/backlinks','/v1/recent','/v1/search'}
 

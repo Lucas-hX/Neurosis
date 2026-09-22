@@ -1,31 +1,12 @@
 Experiments
-<p>Track B — NEUROSIS Lab. All experiments below are planned; none has published results. EXP-001 is the first implementation target, with EXP-000 providing a later single-agent comparison.</p>
-<h2 id="exp-000">EXP-000 — Single vs Swarm Baseline</h2>
-<p>Status: planned.</p>
-<h2 id="exp-001">EXP-001 — Consensus Is Not Independence</h2>
-<p>Status: planned.</p>
-<p><a href="/experiments/exp-001">Hypothesis and methodology</a></p>
-<h2 id="exp-002">EXP-002 — Sybil Consensus Attack</h2>
-<p>Status: planned.</p>
-<h2 id="exp-003">EXP-003 — Eclipse / Information Partition Attack</h2>
-<p>Status: planned.</p>
-<h2 id="exp-004">EXP-004 — Byzantine Knowledge Propagation</h2>
-<p>Status: planned.</p>
-<h2 id="exp-005">EXP-005 — Replay / Stale-Trust Attack</h2>
-<p>Status: planned.</p>
-<h2 id="exp-006">EXP-006 — Persistent Fork / Belief Reconciliation</h2>
-<p>Status: planned.</p>
-<h2 id="exp-007">EXP-007 — Population Capture / Agent Nakamoto Coefficient</h2>
-<p>Status: planned.</p>
-<h2 id="exp-008">EXP-008 — Oracle Independence / Shared Source Manipulation</h2>
-<p>Status: planned.</p>
-<h2 id="exp-009">EXP-009 — Emergent Shared Substrate</h2>
-<p>Status: planned.</p>
-<h2 id="exp-010">EXP-010 — Censorship / Data Availability</h2>
-<p>Status: planned.</p>
-<h2 id="exp-011">EXP-011 — Capability Aggregation</h2>
-<p>Status: planned.</p>
-<h2 id="exp-012">EXP-012 — Agent MEV / Intent Front-Running (speculative)</h2>
-<p>Status: planned.</p>
-<p>EXP-009 is Emergent Shared Substrate; EXP-002 is Sybil Consensus Attack. The implementation brief reused EXP-002 in one roadmap heading; these stable IDs follow its full experiment catalogue.</p>
-<p><a href="https://github.com/Lucas-hX/Neurosis/blob/main/docs/RESEARCH_DIRECTION.md">Questions and proposed measurements</a> · <a href="/lab">Lab overview</a></p>
+<p class="lede">Reproducible studies across embodied AI, autonomous agents, shared memory, and multi-agent security. Planned work is labeled separately from completed experiments and findings.</p>
+<h2 id="embodied-ai">Embodied AI security</h2>
+<article class="program-card"><p class="status">Design stage · No empirical results</p><h3>StaleAction — Physical TOCTOU</h3><p>Test post-observation physical state changes across action horizons and attack timings; measure outcomes against Observation–Action Age and the Adversarial Freshness Window.</p><a href="/papers/staleaction">Threat model and proposed methodology</a></article>
+<h2 id="agent-systems">Agent systems and shared state</h2>
+<p>The original NEUROSIS experiment studies persistence, provenance, and population-level security. The first controlled protocol is frozen in the repository, but no reviewed provider run or controlled finding is published.</p>
+<div class="program-grid">
+  <article class="program-card"><p class="status">EXP-001 · Pre-pilot</p><h3>Consensus Is Not Independence</h3><p>Whether repeated claims derived from one source are treated as independent corroboration.</p><a href="/experiments/exp-001">Methodology</a></article>
+  <article class="program-card"><p class="status">Planned program</p><h3>Adversarial agent populations</h3><p>Sybil consensus, information partitions, Byzantine propagation, stale trust, persistent belief forks, source manipulation, and emergent shared substrates.</p><a href="/lab">Program overview</a></article>
+</div>
+<h2 id="evidence">Evidence boundary</h2>
+<p>Fixture runs validate research infrastructure; they are not experimental findings. Synthetic and operator-generated activity remains separate from naturalistic observations of the public memory service.</p>

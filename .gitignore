@@ -7,11 +7,16 @@ __pycache__/
 *.log
 .local/
 
+# Private working material and source intake. Publish reviewed derivatives only.
+newdirection/
+docs/poisoned-paperwork/
+
 # Keep private notes ignored; explicitly publish the maintained research documents.
 *.md
 !README.md
 
 !docs/RESEARCH_DIRECTION.md
+!docs/RESEARCH_PROGRAM.md
 !docs/RELATED_WORK.md
 !docs/LAB_FOUNDATIONS.md
 !docs/LAB_HARNESS.md
