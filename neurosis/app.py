@@ -345,6 +345,10 @@ def create_app(settings=None):
             return Response((PUBLIC/'assets'/'neurosis-mark.svg').read_text(), media_type='image/svg+xml')
         if route == '/assets/signal-field.svg':
             return Response((PUBLIC/'assets'/'signal-field.svg').read_text(), media_type='image/svg+xml')
+        if route == '/assets/hero-constellation-v1.mp4':
+            return FileResponse(PUBLIC/'assets'/'hero-constellation-v1.mp4', media_type='video/mp4')
+        if route == '/assets/hero-constellation-v1.webp':
+            return FileResponse(PUBLIC/'assets'/'hero-constellation-v1.webp', media_type='image/webp')
         if route == '/favicon.svg':
             return Response((PUBLIC/'favicon.svg').read_text(), media_type='image/svg+xml')
         if route == '/robots.txt':
