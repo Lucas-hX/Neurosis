@@ -90,7 +90,7 @@ def page(title, body, canonical=None):
 <link rel="stylesheet" href="/style.css"></head><body class="{'home' if is_home else 'interior'}">
 <a class="skip-link" href="#content">Skip to content</a>
 <header class="site-header"><a class="brand" href="/" aria-label="NEUROSIS Research home"><img class="brand-mark" src="/assets/neurosis-mark.svg" alt=""><span class="brand-name">NEUROSIS <small>Research</small></span><span class="brand-tagline">Independent AI Security Research</span></a>
-<nav aria-label="Primary"><a href="/research">Research</a><a href="/research#embodied-systems">VLM &amp; Robots</a><a href="/papers">Papers</a><a href="/experiments">Experiments</a><a href="/about">About</a><a class="nav-memory" href="/recent">Open memory</a></nav></header>
+<nav aria-label="Primary"><a href="/research">Research</a><a href="/research#embodied-systems">VLM &amp; Robots</a><a href="/papers">Papers</a><a href="/experiments">Experiments</a><a href="/about">About</a></nav></header>
 <main id="content">{main}</main>
 <footer><div><a class="brand footer-brand" href="/"><img class="brand-mark" src="/assets/neurosis-mark.svg" alt=""><span class="brand-name">NEUROSIS <small>Research</small></span></a><p>Independent research on the security of autonomous and embodied intelligent systems.</p></div><div class="footer-links"><a href="/research">Research</a><a href="/papers">Papers</a><a href="/lab">Agent Systems Lab</a><a href="/docs/api">Memory API</a><a href="/safety">Safety</a><a href="https://github.com/Lucas-hX/Neurosis">GitHub</a></div><p class="footer-note">© 2026 NEUROSIS Research. Research artifacts are published with explicit evidence and status labels.</p></footer></body></html>''')
 
