@@ -67,8 +67,8 @@ button { cursor: pointer; border-color: var(--accent); }
 .button.primary::after { color: white; }
 .hero-visual { position: absolute; z-index: 0; inset: 0 0 0 31%; margin: 0; overflow: hidden; background: #090b0d; }
 .hero-visual::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, var(--bg) 0%, rgba(9,11,13,.95) 13%, rgba(9,11,13,.28) 48%, rgba(9,11,13,.06) 100%), linear-gradient(0deg, rgba(9,11,13,.84), transparent 35%); }
-.hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.hero-visual img.signal-field { animation: signal-breathe 8s ease-in-out infinite alternate; }
+.hero-visual .hero-poster, .hero-visual video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 64% center; filter: blur(3px) brightness(.78); transform: scale(1.025); }
+.hero-visual video { pointer-events: none; }
 .hero-visual figcaption { position: absolute; z-index: 2; right: 18px; bottom: 16px; max-width: 330px; color: #c5c9cc; font-family: var(--mono); font-size: 9px; letter-spacing: .12em; text-align: right; text-transform: uppercase; }
 .hero-visual figcaption span { display: block; margin-bottom: 3px; color: var(--accent); }
 
@@ -124,7 +124,6 @@ footer p { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
 .footer-brand .brand-name { font-size: 18px; }
 .footer-brand .brand-mark { height: 32px; }
 
-@keyframes signal-breathe { from { transform: scale(1); filter: brightness(.88); } to { transform: scale(1.035); filter: brightness(1.14); } }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 22px; font-size: 12px; }
 .footer-note { grid-column: 1 / -1; padding-top: 20px; border-top: 1px solid var(--rule); }
 
@@ -161,4 +160,4 @@ footer p { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
   .footer-note { grid-column: auto; }
 }
 
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .hero-visual img.signal-field { animation: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .hero-visual video { display: none; } }

@@ -106,7 +106,8 @@ def test_lab_public_pages(client):
     home = client.get('/').text
     assert 'Independent AI Security Research' in home and 'StaleAction' in home
     assert 'VLM Security' in home and 'VLA &amp; Robot Security' in home
-    assert 'Memory &amp; Provenance' in home and 'signal-field.svg' in home
+    assert 'Memory &amp; Provenance' in home and 'hero-constellation-v1.mp4' in home
+    assert '<video autoplay muted loop playsinline' in home
     assert 'href="/recent"' in home and 'href="/papers"' in home
     assert 'NEUROSIS Research — Independent AI Security Research</title>' in home
     assert '/lab.md' in client.get('/llms.txt').text and '/papers/staleaction.md' in client.get('/llms.txt').text
@@ -123,6 +124,13 @@ def test_lab_public_pages(client):
     for path in ('/assets/neurosis-mark.svg', '/assets/signal-field.svg', '/favicon.svg'):
         asset = client.get(path)
         assert asset.status_code == 200 and asset.headers['content-type'].startswith('image/svg+xml')
+    video = client.get('/assets/hero-constellation-v1.mp4', headers={'Range': 'bytes=0-1023'})
+    assert video.status_code == 206 and len(video.content) == 1024
+    assert video.headers['content-type'] == 'video/mp4'
+    assert 'immutable' in video.headers['cache-control']
+    assert "media-src 'self'" in video.headers['content-security-policy']
+    poster = client.get('/assets/hero-constellation-v1.webp')
+    assert poster.status_code == 200 and poster.headers['content-type'] == 'image/webp'
     hero = client.get('/assets/robot-vla-hero.webp')
     assert hero.status_code == 200 and hero.headers['content-type'] == 'image/webp'
     assert set(client.get('/openapi.json').json()['paths']) == {

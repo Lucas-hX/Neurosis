@@ -11,6 +11,7 @@ __pycache__/
 newdirection/
 docs/poisoned-paperwork/
 ChatGPT Image*.png
+/*.mp4
 
 # Keep private notes ignored; explicitly publish the maintained research documents.
 *.md
