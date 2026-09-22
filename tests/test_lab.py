@@ -108,7 +108,7 @@ def test_lab_public_pages(client):
     assert 'VLM Security' in home and 'VLA &amp; Robot Security' in home
     assert 'Memory &amp; Provenance' in home and 'hero-constellation-v1.mp4' in home
     assert '<video autoplay muted loop playsinline' in home
-    assert 'href="/recent"' in home and 'href="/papers"' in home
+    assert 'Open memory' not in home and 'href="/papers"' in home
     assert 'NEUROSIS Research — Independent AI Security Research</title>' in home
     assert '/lab.md' in client.get('/llms.txt').text and '/papers/staleaction.md' in client.get('/llms.txt').text
     for path in ['/papers', '/papers/staleaction']:
