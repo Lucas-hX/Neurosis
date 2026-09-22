@@ -1,6 +1,6 @@
 # NEUROSIS Research
 
-![NEUROSIS Research — Independent AI Security Research](assets/neurosis-banner.svg)
+![NEUROSIS Research — signal mark and four research areas](assets/neurosis-banner.svg)
 
 **Independent AI Security Research**
 
@@ -12,22 +12,22 @@ NEUROSIS Research is an independent research organization studying security fail
 
 ## Research areas
 
-- **Agent Security:** tool use, agent loops, sandboxing, authority boundaries, prompt injection, state manipulation, and long-horizon behavior.
-- **Memory & Provenance:** retrieval, reconsolidation, poisoning, lineage, correlated evidence, persistence, and cross-agent propagation.
-- **Multi-Agent Systems:** coordination, shared state, consensus, adversarial propagation, emergent substrates, and Byzantine behavior.
-- **Embodied & Physical AI Security:** VLM and VLA systems, perception-to-action boundaries, physical prompt injection, robotics, and adversarial interaction with the physical world.
+1. **VLM Security:** multimodal attacks, physical prompt injection, scene manipulation, grounding, and adversarial perception.
+2. **VLA & Robot Security:** action freshness, physical TOCTOU, runtime validation, robotics, and perception-to-action failures.
+3. **Agent & Multi-Agent Security:** tool use, authority boundaries, coordination, shared state, adversarial propagation, and emergent behavior.
+4. **Memory & Provenance:** retrieval, poisoning, lineage, correlated evidence, persistence, and cross-agent propagation.
 
-## Working paper: StaleAction
+## Working paper preview: StaleAction
 
 **Physical TOCTOU Attacks Against Vision-Language-Action Robots: Exploiting Observation–Action Freshness in Embodied Control**
 
-Lucas-hX · NEUROSIS Research · Draft v0.1 · September 2026
+Lucas-hX · NEUROSIS Research · September 2026
 
 StaleAction asks whether an adversary can exploit the gap between a robot's observation and physical execution by changing task-relevant state after a legitimate observation has been consumed. The draft proposes Observation–Action Age and the Adversarial Freshness Window as candidate measures and outlines a controlled benchmark.
 
-This version develops a threat model and research plan. It does not claim empirical validation.
+The public preview describes the threat model and research plan. The full paper is being prepared; no empirical validation is claimed.
 
-[Paper overview](https://neurosis.io/papers/staleaction) · [Draft PDF](public/papers/staleaction-draft-v0.1.pdf) · [Draft HTML](public/papers/staleaction-draft-v0.1.html)
+[Read the preview](https://neurosis.io/papers/staleaction)
 
 ## Continuity with the original NEUROSIS
 
@@ -43,7 +43,7 @@ Both the original and expanded programs study systems that act on representation
 
 | Area | Contents |
 | --- | --- |
-| `public/` | Organization website, research pages, and paper artifacts |
+| `public/` | Organization website, research pages, and public previews |
 | `neurosis/` | Public memory service and isolated Lab implementation |
 | `experiments/` | Versioned experiment protocols and prompts |
 | `docs/` | Research direction, related work, methods, and runbooks |

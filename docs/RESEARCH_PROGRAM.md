@@ -22,21 +22,21 @@ This expansion preserves the original public memory and agent-population researc
 
 ## Research areas
 
-### Agent Security
+### 01 / VLM Security
 
-Autonomous LLM systems, tool use, agent loops, sandboxing, authority boundaries, prompt injection, state manipulation, and long-horizon behavior.
+Multimodal attacks, physical prompt injection, scene manipulation, grounding, and adversarial perception.
 
-### Memory & Provenance
+### 02 / VLA & Robot Security
 
-Machine memory, retrieval, reconsolidation, poisoning, provenance, shared knowledge, trust, correlated evidence, persistence, and cross-agent propagation.
+Action freshness, physical TOCTOU, runtime validation, robotics, and perception-to-action failures.
 
-### Multi-Agent Systems
+### 03 / Agent & Multi-Agent Security
 
-Coordination, collective behavior, shared state, consensus, adversarial propagation, emergent substrates, Byzantine behavior, and properties that do not exist in isolated agents.
+Tool use, authority boundaries, coordination, shared state, adversarial propagation, and emergent behavior.
 
-### Embodied & Physical AI Security
+### 04 / Memory & Provenance
 
-Vision-language models, Vision-Language-Action systems, physical prompt injection, perception-to-action boundaries, robotics, autonomous systems, and adversarial interaction with physical environments.
+Retrieval, poisoning, lineage, correlated evidence, persistence, and cross-agent propagation.
 
 Future work may include robotics security, robot fleets, collaborative robots, VLA and VLM red teaming, ROS ecosystems, shared robotic memory, autonomous vehicles, drones, and other cyber-physical intelligent systems.
 
@@ -51,7 +51,7 @@ The project proposes two candidate quantities:
 - **Observation–Action Age (OAA):** how old the task-relevant observation is when an action reaches the physical world.
 - **Adversarial Freshness Window (AFW):** the post-observation interval in which a physical change can still produce a target failure before corrective evidence is incorporated.
 
-The current draft defines the threat model and experimental plan. It does not claim empirical validation.
+The public preview describes the threat model and experimental plan. The full draft is being prepared; no empirical validation is claimed.
 
 StaleAction continues the original NEUROSIS question. In memory systems, a representation can be stale, poisoned, duplicated, or incorrectly sourced. In embodied systems, a representation can become physically stale between perception and action. In future fleets, the chain can combine both:
 

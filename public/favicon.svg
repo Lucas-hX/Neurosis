@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <title>NEUROSIS Research</title>
-  <rect width="64" height="64" rx="10" fill="#090b0d"/>
-  <path d="M22 15v34M31 15v34" stroke="#ed2638" stroke-width="4"/>
-  <path d="M40 18v28" stroke="#f0ede7" stroke-width="2" opacity=".9"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NEUROSIS Research">
+<rect width="64" height="64" rx="12" fill="#0b0c0e"/>
+<circle cx="32" cy="32" r="23" fill="none" stroke="#5c6365" stroke-width=".7" stroke-dasharray="1 3"/>
+<path d="M32 7v50M32 12C28 25 16 25 16 32s12 7 16 20M32 12c4 13 16 13 16 20s-12 7-16 20M32 18C24 28 11 28 11 32s13 4 21 14M32 18c8 10 21 10 21 14s-13 4-21 14" fill="none" stroke="#a5a9a7" stroke-width=".8"/>
+<path d="M32 22l2 8 8 2-8 2-2 8-2-8-8-2 8-2z" fill="#e11d2e"/>
+<circle cx="32" cy="7" r="2" fill="#e11d2e"/><circle cx="32" cy="57" r="2" fill="#e11d2e"/>
 </svg>
