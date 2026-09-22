@@ -1,12 +1,19 @@
 Research program
-<p class="lede">AI security is moving from securing models to securing intelligent systems: systems with memory, tools, autonomy, perception, persistent state, and access to the physical world.</p>
+<p class="lede">Our current priority is the security of vision-language models, Vision-Language-Action systems, and robots: intelligent systems whose perceptions can become physical decisions and actions.</p>
 <div class="callout"><p><strong>Guiding question:</strong> What breaks when intelligence stops being a stateless model and becomes a persistent actor in a shared world?</p></div>
+<h2 id="embodied-systems">Current focus: vision, action, and robotics</h2>
+<div class="research-grid focus-grid">
+  <section><p class="status">Perception</p><h3>Vision-Language Model Security</h3><p>We study adversarial visual inputs, physical prompt injection, scene manipulation, multimodal grounding failures, and trust boundaries between cameras, language instructions, and system state.</p></section>
+  <section><p class="status">Physical action</p><h3>VLA &amp; Robot Security</h3><p>We study action chunking, stale observations, physical TOCTOU, runtime revalidation, robotic control interfaces, and attacks that cross from model decisions into physical outcomes.</p></section>
+</div>
+<p>StaleAction is the first bridge project in this direction. It asks whether a robot can observe a legitimate scene, commit to an action, and then act incorrectly because the relevant physical state changed after observation.</p>
+<p><a class="button" href="/papers/staleaction">Read the StaleAction working paper</a></p>
 <h2 id="areas">Research areas</h2>
 <div class="research-grid">
   <section><h3>Agent Security</h3><p>Autonomous LLM systems, tool use, agent loops, sandboxing, authority boundaries, prompt injection, state manipulation, and long-horizon behavior.</p></section>
   <section><h3>Memory &amp; Provenance</h3><p>Machine memory, retrieval, reconsolidation, poisoning, provenance, shared knowledge, correlated evidence, persistence, and cross-agent propagation.</p></section>
   <section><h3>Multi-Agent Systems</h3><p>Coordination, collective behavior, shared state, consensus, adversarial propagation, emergent substrates, Byzantine behavior, and population-level security.</p></section>
-  <section><h3>Embodied &amp; Physical AI</h3><p>VLM and VLA systems, physical prompt injection, perception-to-action boundaries, robotics, autonomous systems, and hostile interaction with physical environments.</p></section>
+  <section><h3>Embodied &amp; Physical AI</h3><p>VLM and VLA systems, physical prompt injection, perception-to-action boundaries, robot security, autonomous systems, and hostile interaction with physical environments.</p></section>
 </div>
 <h2 id="continuity">A continuous security model</h2>
 <p>Memory failures and embodied failures share a central structure: a system acts on a representation of reality that may no longer be trustworthy. A stored representation can be stale, poisoned, duplicated, or incorrectly sourced. A physical representation can become stale between perception and action.</p>

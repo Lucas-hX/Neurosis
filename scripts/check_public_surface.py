@@ -24,8 +24,8 @@ for path in ('/','/about','/research','/papers','/papers/staleaction','/safety',
     assert 'href="/favicon.svg"' in body, path
     if path == '/':
         assert '<title>NEUROSIS Research — Independent AI Security Research</title>' in body
-        assert '<meta name="description" content="NEUROSIS Research is an independent AI security research organization studying autonomous and embodied intelligent systems.">' in body
-        assert 'StaleAction' in body and 'Memory &amp; Provenance' in body
+        assert '<meta name="description" content="Independent security research on vision-language models, Vision-Language-Action systems, robots, autonomous agents, and machine memory.">' in body
+        assert 'StaleAction' in body and 'VLA &amp; Robot Security' in body and 'robot-vla-hero.webp' in body
     mirror='/index.md' if path=='/' else path+'.md'
     text,md_headers=read(mirror)
     assert text.startswith('# ') and 'text/markdown' in md_headers['Content-Type'],mirror

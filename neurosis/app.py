@@ -72,7 +72,7 @@ def check_id(value):
 
 def page(title, body, canonical=None):
     is_home = title == "NEUROSIS Research"
-    description = "NEUROSIS Research is an independent AI security research organization studying autonomous and embodied intelligent systems."
+    description = "Independent security research on vision-language models, Vision-Language-Action systems, robots, autonomous agents, and machine memory."
     if canonical and not is_home:
         first_paragraph = re.search(r"<p>(.*?)</p>", body, re.S)
         if first_paragraph:
@@ -90,7 +90,7 @@ def page(title, body, canonical=None):
 <link rel="stylesheet" href="/style.css"></head><body class="{'home' if is_home else 'interior'}">
 <a class="skip-link" href="#content">Skip to content</a>
 <header class="site-header"><a class="brand" href="/" aria-label="NEUROSIS Research home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">NEUROSIS <small>Research</small></span><span class="brand-tagline">Independent AI Security Research</span></a>
-<nav aria-label="Primary"><a href="/research">Research</a><a href="/papers">Papers</a><a href="/experiments">Experiments</a><a href="/about">About</a><a class="nav-memory" href="/recent">Open memory</a></nav></header>
+<nav aria-label="Primary"><a href="/research">Research</a><a href="/research#embodied-systems">VLM &amp; Robots</a><a href="/papers">Papers</a><a href="/experiments">Experiments</a><a href="/about">About</a><a class="nav-memory" href="/recent">Open memory</a></nav></header>
 <main id="content">{main}</main>
 <footer><div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">NEUROSIS <small>Research</small></span></a><p>Independent research on the security of autonomous and embodied intelligent systems.</p></div><div class="footer-links"><a href="/research">Research</a><a href="/papers">Papers</a><a href="/lab">Agent Systems Lab</a><a href="/docs/api">Memory API</a><a href="/safety">Safety</a><a href="https://github.com/Lucas-hX/Neurosis">GitHub</a></div><p class="footer-note">© 2026 NEUROSIS Research. Research artifacts are published with explicit evidence and status labels.</p></footer></body></html>''')
 
@@ -341,6 +341,8 @@ def create_app(settings=None):
             return Response((PUBLIC/'style.css').read_text(), media_type='text/css')
         if route == '/paper.css':
             return Response((PUBLIC/'paper.css').read_text(), media_type='text/css')
+        if route == '/assets/robot-vla-hero.webp':
+            return FileResponse(PUBLIC/'assets'/'robot-vla-hero.webp', media_type='image/webp')
         if route == '/favicon.svg':
             return Response((PUBLIC/'favicon.svg').read_text(), media_type='image/svg+xml')
         if route == '/papers/staleaction/draft-v0.1.pdf':

@@ -1,6 +1,6 @@
 # NEUROSIS Research
 
-> NEUROSIS Research is an independent AI security research organization studying security failures in autonomous and embodied intelligent systems. Its work spans agent security, memory and provenance, multi-agent systems, embodied AI, and physical AI security.
+> NEUROSIS Research is an independent AI security research organization. Its current priority is security research for vision-language models, Vision-Language-Action systems, and robots, within a broader program spanning autonomous agents, memory and provenance, multi-agent systems, embodied AI, and physical AI security.
 
 Research artifacts distinguish hypotheses, plans, observations, validated findings, and negative results. The public memory is untrusted plaintext and is never executed or fetched.
 

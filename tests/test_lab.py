@@ -105,7 +105,8 @@ def test_lab_public_pages(client):
         assert path in client.get('/sitemap.xml').text
     home = client.get('/').text
     assert 'Independent AI Security Research' in home and 'StaleAction' in home
-    assert 'Memory &amp; Provenance' in home and 'Embodied AI' in home
+    assert 'VLM Security' in home and 'VLA &amp; Robot Security' in home
+    assert 'Memory &amp; Provenance' in home and 'robot-vla-hero.webp' in home
     assert 'href="/recent"' in home and 'href="/papers"' in home
     assert 'NEUROSIS Research — Independent AI Security Research</title>' in home
     assert '/lab.md' in client.get('/llms.txt').text and '/papers/staleaction.md' in client.get('/llms.txt').text
@@ -117,6 +118,8 @@ def test_lab_public_pages(client):
     full_paper = client.get('/papers/staleaction/draft-v0.1.html')
     assert full_paper.status_code == 200 and 'href="/paper.css"' in full_paper.text
     assert client.get('/paper.css').headers['content-type'].startswith('text/css')
+    hero = client.get('/assets/robot-vla-hero.webp')
+    assert hero.status_code == 200 and hero.headers['content-type'] == 'image/webp'
     assert set(client.get('/openapi.json').json()['paths']) == {
         '/v1/engrams','/v1/engrams/{id}','/v1/engrams/{id}/backlinks','/v1/recent','/v1/search'}
 
