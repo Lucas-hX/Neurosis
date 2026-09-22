@@ -55,7 +55,7 @@ input, button { max-width: 100%; border: 1px solid var(--rule-strong); backgroun
 button { cursor: pointer; border-color: var(--accent); }
 
 .eyebrow, .kicker, .status, .card-label { color: var(--accent); font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
-.hero { position: relative; min-height: 540px; display: grid; align-items: center; padding: 30px 42% 42px 0; overflow: hidden; }
+.hero { position: relative; min-height: 590px; display: grid; align-items: center; padding: 46px 47% 52px 0; overflow: hidden; border-bottom: 1px solid var(--rule); }
 .hero-copy { position: relative; z-index: 2; }
 .hero h1 { margin-top: 16px; }
 .hero h1 em { color: var(--accent); font-weight: 400; }
@@ -65,12 +65,11 @@ button { cursor: pointer; border-color: var(--accent); }
 .button::after { content: "\2192"; color: var(--accent); }
 .button.primary { border-color: var(--accent); background: var(--accent); color: #fff; }
 .button.primary::after { color: white; }
-.signal-field { position: absolute; right: -40px; top: 7px; width: 520px; aspect-ratio: 1; border: 1px solid var(--rule); border-radius: 50%; background: radial-gradient(circle, transparent 0 8%, var(--accent-soft) 8.2% 8.5%, transparent 8.8% 30%, rgba(255,255,255,.06) 30.2% 30.5%, transparent 30.8% 52%, rgba(255,255,255,.08) 52.2% 52.5%, transparent 52.8%), linear-gradient(36deg, transparent 49.8%, rgba(237,38,56,.3) 50%, transparent 50.2%), linear-gradient(125deg, transparent 49.8%, rgba(255,255,255,.08) 50%, transparent 50.2%); opacity: .85; }
-.signal-field::before, .signal-field::after { content: ""; position: absolute; border: 1px solid var(--rule-strong); border-radius: 50%; }
-.signal-field::before { inset: 18%; }
-.signal-field::after { inset: 36%; border-color: var(--accent); box-shadow: 178px 56px 0 -4px var(--accent), -73px 112px 0 -4px var(--accent); }
-.signal-legend { position: absolute; right: 55px; top: 190px; z-index: 1; display: grid; gap: 10px; color: #b2b7bc; font-family: var(--mono); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
-.signal-legend span::before { content: ""; display: inline-block; width: 5px; height: 5px; margin-right: 10px; background: var(--accent); }
+.hero-visual { position: absolute; z-index: 0; inset: 0 0 0 31%; margin: 0; overflow: hidden; background: #090b0d; }
+.hero-visual::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, var(--bg) 0%, rgba(9,11,13,.95) 13%, rgba(9,11,13,.28) 48%, rgba(9,11,13,.06) 100%), linear-gradient(0deg, rgba(9,11,13,.84), transparent 35%); }
+.hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 62% center; filter: contrast(1.03) saturate(.88); }
+.hero-visual figcaption { position: absolute; z-index: 2; right: 18px; bottom: 16px; max-width: 330px; color: #c5c9cc; font-family: var(--mono); font-size: 9px; letter-spacing: .12em; text-align: right; text-transform: uppercase; }
+.hero-visual figcaption span { display: block; margin-bottom: 3px; color: var(--accent); }
 
 .principles { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--rule); }
 .principles div { padding: 20px 22px 20px 0; border-right: 1px solid var(--rule); }
@@ -84,8 +83,8 @@ button { cursor: pointer; border-color: var(--accent); }
 .featured { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(250px, .65fr); gap: 18px; margin-top: 22px; }
 .paper-card, .thesis-card, .area-card, .program-card { border: 1px solid var(--rule-strong); background: linear-gradient(135deg, var(--surface-raised), var(--surface)); }
 .paper-card { display: grid; grid-template-columns: 220px 1fr; min-height: 290px; text-decoration: none; }
-.paper-visual { position: relative; overflow: hidden; border-right: 1px solid var(--rule); background: linear-gradient(145deg, #171b1f, #080a0c); }
-.paper-visual::before { content: ""; position: absolute; width: 130px; height: 130px; left: 42px; top: 70px; border: 1px solid var(--accent); transform: rotate(8deg); box-shadow: 30px -24px 0 -1px #111519, 30px -24px 0 0 var(--rule-strong), 52px 35px 0 -1px #111519, 52px 35px 0 0 var(--accent); }
+.paper-visual { position: relative; overflow: hidden; border-right: 1px solid var(--rule); background: linear-gradient(0deg, rgba(8,10,12,.6), transparent 55%), url('/assets/robot-vla-hero.webp') 78% center / cover; }
+.paper-visual::before { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(237,38,56,.42); border-width: 1px 0 0 1px; }
 .paper-visual::after { content: "OBSERVE  /  COMMIT  /  ACT"; position: absolute; left: 20px; bottom: 18px; color: var(--muted); font-family: var(--mono); font-size: 8px; letter-spacing: .12em; }
 .paper-copy { padding: 30px; }
 .paper-copy h3 { margin: 8px 0 2px; font-size: 38px; }
@@ -131,9 +130,9 @@ footer p { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
   .brand-tagline { display: none; }
   nav { justify-content: flex-end; flex-wrap: wrap; gap: 10px 20px; }
   .nav-memory { padding: 4px 8px; }
-  .hero { min-height: 610px; padding: 30px 15% 260px 0; }
-  .signal-field { width: 360px; top: auto; bottom: -105px; right: 5%; }
-  .signal-legend { right: 11%; top: auto; bottom: 80px; }
+  .hero { min-height: 720px; padding: 34px 8% 350px 0; }
+  .hero-visual { inset: auto 0 0 0; height: 330px; }
+  .hero-visual::before { background: linear-gradient(180deg, var(--bg), transparent 30%), linear-gradient(0deg, rgba(9,11,13,.8), transparent 40%); }
   .principles { grid-template-columns: 1fr 1fr; }
   .principles div:nth-child(2) { border-right: 0; }
   .featured, .continuity { grid-template-columns: 1fr; }
@@ -144,10 +143,10 @@ footer p { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
   .site-header { min-height: 0; display: block; padding: 20px; }
   nav { margin-top: 20px; justify-content: flex-start; font-size: 13px; }
   main, .interior main { padding: 52px 20px 80px; }
-  .hero { min-height: 650px; padding-right: 0; }
+  .hero { min-height: 760px; padding: 26px 0 360px; }
   .hero h1 { font-size: 49px; }
-  .signal-field { right: -90px; }
-  .signal-legend { left: 12px; right: auto; }
+  .hero-visual { height: 335px; margin-inline: -20px; }
+  .hero-visual figcaption { left: 20px; right: 20px; text-align: left; }
   .principles, .area-grid, .research-grid, .program-grid { grid-template-columns: 1fr; }
   .principles div, .principles div + div { padding: 16px 0; border-right: 0; border-bottom: 1px solid var(--rule); }
   .paper-card { grid-template-columns: 1fr; }
