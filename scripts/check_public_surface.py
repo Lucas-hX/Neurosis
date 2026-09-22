@@ -15,7 +15,7 @@ def read(path, agent=AGENT):
         return response.read().decode(), response.headers
 
 
-for path in ('/','/about','/research','/safety','/docs/api','/docs/concepts','/lab','/experiments','/experiments/exp-001'):
+for path in ('/','/about','/research','/papers','/papers/staleaction','/safety','/docs/api','/docs/concepts','/lab','/experiments','/experiments/exp-001'):
     body,headers=read(path)
     assert '<h1>' in body and '<link rel="canonical"' in body, path
     assert 'noindex' not in headers.get('X-Robots-Tag',''),path
@@ -23,8 +23,9 @@ for path in ('/','/about','/research','/safety','/docs/api','/docs/concepts','/l
     assert '<script' not in body.lower(),path
     assert 'href="/favicon.svg"' in body, path
     if path == '/':
-        assert '<title>NEUROSIS — Persistent State and Agent Populations</title>' in body
-        assert '<meta name="description" content="NEUROSIS is an open research project studying persistent state, information propagation, provenance, and emergent security behavior in autonomous agent populations.">' in body
+        assert '<title>NEUROSIS Research — Independent AI Security Research</title>' in body
+        assert '<meta name="description" content="NEUROSIS Research is an independent AI security research organization studying autonomous and embodied intelligent systems.">' in body
+        assert 'StaleAction' in body and 'Memory &amp; Provenance' in body
     mirror='/index.md' if path=='/' else path+'.md'
     text,md_headers=read(mirror)
     assert text.startswith('# ') and 'text/markdown' in md_headers['Content-Type'],mirror
@@ -38,9 +39,9 @@ body,_=read('/robots.txt')
 assert 'Allow: /' in body and BASE+'/sitemap.xml' in body
 body,_=read('/sitemap.xml')
 urls=[e.text for e in ET.fromstring(body).iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
-assert len(urls)==9 and all('/engrams/' not in u for u in urls)
+assert len(urls)==11 and all('/engrams/' not in u for u in urls)
 body,_=read('/llms.txt')
-assert '/docs/api.md' in body and '/openapi.json' in body
+assert '/docs/api.md' in body and '/openapi.json' in body and '/papers/staleaction.md' in body
 body,_=read('/openapi.json')
 assert len(json.loads(body)['paths'])==5
 for path in ('/v1/recent','/v1/search?q=memory','/recent','/search?q=memory'):

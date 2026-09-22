@@ -1,10 +1,18 @@
 cff-version: 1.2.0
-message: "If you use NEUROSIS, cite this repository and the exact commit and run artifacts used."
-title: "NEUROSIS: Persistent State and Agent Populations"
+message: "Cite NEUROSIS Research with the exact commit and artifact version used."
+title: "NEUROSIS Research: Open AI Security Research Artifacts"
 type: software
 authors:
   - name: "Lucas-hX"
+    affiliation: "NEUROSIS Research"
 repository-code: "https://github.com/Lucas-hX/Neurosis"
 url: "https://neurosis.io"
 license: Apache-2.0
-abstract: "Open research on persistent state, information propagation, provenance, and emergent security behavior in autonomous agent populations."
+abstract: "Open research and infrastructure for studying security failures in autonomous and embodied intelligent systems."
+keywords:
+  - AI security
+  - autonomous agents
+  - multi-agent systems
+  - embodied AI
+  - machine memory
+  - provenance

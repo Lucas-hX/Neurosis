@@ -1,0 +1,27 @@
+StaleAction
+<p class="lede">Physical TOCTOU Attacks Against Vision-Language-Action Robots: Exploiting Observation–Action Freshness in Embodied Control.</p>
+<article class="paper-header">
+  <p class="status">Working paper · Draft v0.1 · September 2026</p>
+  <h2>Physical TOCTOU Attacks Against Vision-Language-Action Robots</h2>
+  <p class="subtitle">Exploiting Observation–Action Freshness in Embodied Control</p>
+  <p><strong>Lucas-hX</strong><br>NEUROSIS Research</p>
+  <div class="actions"><a class="button primary" href="/papers/staleaction/draft-v0.1.pdf">Download PDF</a><a class="button" href="/papers/staleaction/draft-v0.1.html">Read full draft</a></div>
+</article>
+<h2 id="abstract">Abstract</h2>
+<p>Vision-Language-Action policies can execute temporally extended action chunks from a finite set of observations. This creates a temporal trust assumption: state observed when an action is selected remains sufficiently valid when that action is executed.</p>
+<p>StaleAction asks whether an adversary can exploit that assumption by allowing a legitimate observation, waiting until the policy commits to an action or action chunk, and then changing task-relevant physical state before execution completes. The attacker does not need to alter prompts, model weights, training data, robot software, middleware, or the observation already consumed by the policy.</p>
+<h2 id="metrics">Candidate measures</h2>
+<h3>Observation–Action Age (OAA)</h3><p>The elapsed time between the task-relevant observation used to generate or validate an action and that action’s physical execution.</p>
+<h3>Adversarial Freshness Window (AFW)</h3><p>The interval after an observation during which an attacker can alter physical state and cause a target failure before the policy incorporates corrective evidence.</p>
+<h2 id="status">Evidence status</h2>
+<p>This version develops the threat model, related-work positioning, proposed measures, and evaluation design. It does not report an experiment or claim that the central hypothesis has been validated. The proposed distinction from adjacent work must be demonstrated empirically.</p>
+<h2 id="citation">Citation</h2>
+<pre>@misc{lucashx2026staleaction,
+  author      = {Lucas-hX},
+  title       = {Physical TOCTOU Attacks Against Vision-Language-Action Robots},
+  year        = {2026},
+  institution = {NEUROSIS Research},
+  note        = {Working paper, draft v0.1},
+  url         = {https://neurosis.io/papers/staleaction}
+}</pre>
+<p><a href="/research">Research program</a> · <a href="/papers">All papers</a> · <a href="https://github.com/Lucas-hX/Neurosis">Source repository</a></p>

@@ -1,0 +1,38 @@
+:root { --ink:#161616; --muted:#5b5b5b; --rule:#d8d8d8; --accent:#204a87; --warn:#8b1e1e; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#f3f3f3; color:var(--ink); font-family: Georgia, 'Times New Roman', serif; line-height:1.44; }
+  main { max-width:1100px; margin:32px auto; background:white; padding:56px 66px 64px; box-shadow:0 1px 10px rgba(0,0,0,.08); }
+  header { text-align:center; border-bottom:1px solid var(--rule); padding-bottom:20px; margin-bottom:28px; }
+  h1 { font-size:34px; line-height:1.08; margin:0 0 6px; }
+  .subtitle { font-size:21px; margin-bottom:24px; }
+  .author { font-size:17px; }
+  .status { color:var(--muted); font-style:italic; margin-top:18px; font-size:14px; }
+  .abstract { max-width:920px; margin:0 auto 32px; padding:18px 22px; background:#fafafa; border-left:4px solid #777; }
+  .abstract h2 { margin-top:0; font-size:20px; }
+  h2 { font-size:26px; margin:28px 0 12px; }
+  p { margin:0 0 13px; }
+  .paper-columns { column-count:2; column-gap:42px; text-align:justify; }
+  .paper-columns h2, .paper-columns figure, .paper-columns .equation, .paper-columns .contrib { break-inside:avoid; }
+  figure { margin:20px 0 22px; padding:16px; border:1px solid var(--rule); background:#fff; }
+  figcaption { font-size:14px; color:#333; margin-top:10px; text-align:left; }
+  .diagram { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; line-height:1.28; white-space:pre; overflow:auto; background:#fbfbfb; padding:14px; border-radius:4px; }
+  .equation { text-align:center; font-size:18px; padding:10px 0 14px; }
+  .contrib { background:#fafafa; border:1px solid var(--rule); padding:14px 16px; margin-top:18px; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  sup a { color:var(--accent); font-size:.78em; }
+  .references { margin-top:38px; border-top:1px solid var(--rule); padding-top:22px; }
+  .references ol { padding-left:28px; }
+  .references li { margin-bottom:11px; }
+  .closest { margin-top:30px; padding:16px 18px; border-left:4px solid var(--warn); background:#fffafa; }
+  .closest strong { color:var(--warn); }
+  @media (max-width: 780px) {
+    main { margin:0; padding:28px 22px; }
+    .paper-columns { column-count:1; }
+    h1 { font-size:28px; }
+  }
+  @media print {
+    body { background:white; }
+    main { box-shadow:none; margin:0; max-width:none; padding:0; }
+    a { color:black; }
+  }
