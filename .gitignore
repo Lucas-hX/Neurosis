@@ -10,6 +10,7 @@ __pycache__/
 # Private working material and source intake. Publish reviewed derivatives only.
 newdirection/
 docs/poisoned-paperwork/
+ChatGPT Image*.png
 
 # Keep private notes ignored; explicitly publish the maintained research documents.
 *.md
